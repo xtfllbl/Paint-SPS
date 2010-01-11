@@ -1,0 +1,43 @@
+<RCC>
+    <qresource prefix="/new/prefix1">
+        <file>image/Crystal_Clear_action_apply.png</file>
+        <file>image/Crystal_Clear_action_button_cancel.png</file>
+        <file>image/fang.png</file>
+        <file>image/leftclick.png</file>
+        <file>image/Nuvola_filesystems_folder_blue_open.png</file>
+        <file>image/Nuvola_filesystems_folder_grey_open.png</file>
+        <file>image/Nuvola_filesystems_folder_yellow_open.png</file>
+        <file>image/plus.png</file>
+        <file>image/rightclick.png</file>
+        <file>image/Torchlight_help.png</file>
+        <file>image/wheel.png</file>
+        <file>image/wrong.png</file>
+        <file>image/32px-Crystal_Clear_mimetype_source_r.png</file>
+        <file>image/Crystal_Clear_action_decrypted.png</file>
+        <file>image/edit-select-all.png</file>
+        <file>image/32px-Crystal_Clear_action_db_add.png</file>
+        <file>image/32px-Crystal_Clear_action_db_remove.png</file>
+        <file>image/32px-Crystal_Clear_action_db_update.png</file>
+        <file>image/32px-Crystal_Clear_action_viewmag-.png</file>
+        <file>image/32px-Crystal_Clear_action_viewmag+.png</file>
+        <file>image/120px-Torchlight_viewmag_minus.png</file>
+        <file>image/120px-Torchlight_viewmag_plus.png</file>
+        <file>image/Crystal_Clear_action_exit.png</file>
+        <file>image/Crystal_Clear_action_reload.png</file>
+        <file>image/Torchlight_qt.png</file>
+        <file>image/index_0.png</file>
+        <file>image/index_1.png</file>
+        <file>image/index_2.png</file>
+        <file>image/index_3.png</file>
+        <file>image/index_4.png</file>
+        <file>image/index_5.png</file>
+        <file>image/index_6.png</file>
+        <file>image/index_7.png</file>
+        <file>image/receiveline.png</file>
+        <file>image/r.png</file>
+        <file>image/s.png</file>
+        <file>image/sr.png</file>
+        <file>image/gnome-stock-gnome-run.png</file>
+        <file>image/32px-Crystal_Clear_app_database.png</file>
+    </qresource>
+</RCC>
