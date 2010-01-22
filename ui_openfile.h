@@ -1,8 +1,8 @@
 /********************************************************************************
 ** Form generated from reading ui file 'openfile.ui'
 **
-** Created: Fri Dec 25 11:10:16 2009
-**      by: Qt User Interface Compiler version 4.5.1
+** Created: Fri Jan 22 10:35:19 2010
+**      by: Qt User Interface Compiler version 4.5.3
 **
 ** WARNING! All changes made in this file will be lost when recompiling ui file!
 ********************************************************************************/
@@ -62,7 +62,7 @@ public:
         OpenFile->setWindowModality(Qt::ApplicationModal);
         OpenFile->resize(409, 268);
         QIcon icon;
-        icon.addPixmap(QPixmap(QString::fromUtf8("images/folder.png")), QIcon::Normal, QIcon::Off);
+        icon.addFile(QString::fromUtf8("images/folder.png"), QSize(), QIcon::Normal, QIcon::Off);
         OpenFile->setWindowIcon(icon);
         gridLayout = new QGridLayout(OpenFile);
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
@@ -88,7 +88,7 @@ public:
         btnSFile = new QPushButton(OpenFile);
         btnSFile->setObjectName(QString::fromUtf8("btnSFile"));
         QIcon icon1;
-        icon1.addPixmap(QPixmap(QString::fromUtf8(":/new/prefix1/image/Nuvola_filesystems_folder_yellow_open.png")), QIcon::Normal, QIcon::Off);
+        icon1.addFile(QString::fromUtf8(":/new/prefix1/image/Nuvola_filesystems_folder_yellow_open.png"), QSize(), QIcon::Normal, QIcon::Off);
         btnSFile->setIcon(icon1);
         btnSFile->setIconSize(QSize(30, 30));
 
@@ -114,7 +114,7 @@ public:
         btnRFile = new QPushButton(OpenFile);
         btnRFile->setObjectName(QString::fromUtf8("btnRFile"));
         QIcon icon2;
-        icon2.addPixmap(QPixmap(QString::fromUtf8(":/new/prefix1/image/Nuvola_filesystems_folder_blue_open.png")), QIcon::Normal, QIcon::Off);
+        icon2.addFile(QString::fromUtf8(":/new/prefix1/image/Nuvola_filesystems_folder_blue_open.png"), QSize(), QIcon::Normal, QIcon::Off);
         btnRFile->setIcon(icon2);
         btnRFile->setIconSize(QSize(30, 30));
 
@@ -140,7 +140,7 @@ public:
         btnXFile = new QPushButton(OpenFile);
         btnXFile->setObjectName(QString::fromUtf8("btnXFile"));
         QIcon icon3;
-        icon3.addPixmap(QPixmap(QString::fromUtf8(":/new/prefix1/image/Nuvola_filesystems_folder_grey_open.png")), QIcon::Normal, QIcon::Off);
+        icon3.addFile(QString::fromUtf8(":/new/prefix1/image/Nuvola_filesystems_folder_grey_open.png"), QSize(), QIcon::Normal, QIcon::Off);
         btnXFile->setIcon(icon3);
         btnXFile->setIconSize(QSize(30, 30));
 
@@ -202,7 +202,7 @@ public:
         btnOK->setMinimumSize(QSize(100, 0));
         btnOK->setMaximumSize(QSize(100, 16777215));
         QIcon icon4;
-        icon4.addPixmap(QPixmap(QString::fromUtf8(":/new/prefix1/image/Crystal_Clear_action_apply.png")), QIcon::Normal, QIcon::Off);
+        icon4.addFile(QString::fromUtf8(":/new/prefix1/image/Crystal_Clear_action_apply.png"), QSize(), QIcon::Normal, QIcon::Off);
         btnOK->setIcon(icon4);
 
         horizontalLayout_4->addWidget(btnOK);
@@ -212,7 +212,7 @@ public:
         pushButton->setMinimumSize(QSize(100, 0));
         pushButton->setMaximumSize(QSize(100, 16777215));
         QIcon icon5;
-        icon5.addPixmap(QPixmap(QString::fromUtf8(":/new/prefix1/image/Crystal_Clear_action_button_cancel.png")), QIcon::Normal, QIcon::Off);
+        icon5.addFile(QString::fromUtf8(":/new/prefix1/image/Crystal_Clear_action_button_cancel.png"), QSize(), QIcon::Normal, QIcon::Off);
         pushButton->setIcon(icon5);
 
         horizontalLayout_4->addWidget(pushButton);

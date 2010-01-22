@@ -1,8 +1,8 @@
 /********************************************************************************
 ** Form generated from reading ui file 'mainwindow.ui'
 **
-** Created: Fri Dec 25 14:04:13 2009
-**      by: Qt User Interface Compiler version 4.5.1
+** Created: Fri Jan 22 10:35:19 2010
+**      by: Qt User Interface Compiler version 4.5.3
 **
 ** WARNING! All changes made in this file will be lost when recompiling ui file!
 ********************************************************************************/
@@ -60,50 +60,50 @@ public:
         MainWindow->setMinimumSize(QSize(530, 620));
         MainWindow->setSizeIncrement(QSize(10, 10));
         QIcon icon;
-        icon.addPixmap(QPixmap(QString::fromUtf8("images/report.png")), QIcon::Normal, QIcon::Off);
+        icon.addFile(QString::fromUtf8("images/report.png"), QSize(), QIcon::Normal, QIcon::Off);
         MainWindow->setWindowIcon(icon);
         actionOpen = new QAction(MainWindow);
         actionOpen->setObjectName(QString::fromUtf8("actionOpen"));
         QIcon icon1;
-        icon1.addPixmap(QPixmap(QString::fromUtf8(":/new/prefix1/image/Nuvola_filesystems_folder_yellow_open.png")), QIcon::Normal, QIcon::Off);
+        icon1.addFile(QString::fromUtf8(":/new/prefix1/image/Nuvola_filesystems_folder_yellow_open.png"), QSize(), QIcon::Normal, QIcon::Off);
         actionOpen->setIcon(icon1);
         actionReset = new QAction(MainWindow);
         actionReset->setObjectName(QString::fromUtf8("actionReset"));
         QIcon icon2;
-        icon2.addPixmap(QPixmap(QString::fromUtf8(":/new/prefix1/image/Crystal_Clear_action_reload.png")), QIcon::Normal, QIcon::Off);
+        icon2.addFile(QString::fromUtf8(":/new/prefix1/image/Crystal_Clear_action_reload.png"), QSize(), QIcon::Normal, QIcon::Off);
         actionReset->setIcon(icon2);
         actionRelation = new QAction(MainWindow);
         actionRelation->setObjectName(QString::fromUtf8("actionRelation"));
         actionRelation->setCheckable(true);
         QIcon icon3;
-        icon3.addPixmap(QPixmap(QString::fromUtf8(":/new/prefix1/image/sr.png")), QIcon::Normal, QIcon::Off);
+        icon3.addFile(QString::fromUtf8(":/new/prefix1/image/sr.png"), QSize(), QIcon::Normal, QIcon::Off);
         actionRelation->setIcon(icon3);
         actionCombineFiles = new QAction(MainWindow);
         actionCombineFiles->setObjectName(QString::fromUtf8("actionCombineFiles"));
         QIcon icon4;
-        icon4.addPixmap(QPixmap(QString::fromUtf8(":/new/prefix1/image/32px-Crystal_Clear_app_database.png")), QIcon::Normal, QIcon::Off);
+        icon4.addFile(QString::fromUtf8(":/new/prefix1/image/32px-Crystal_Clear_app_database.png"), QSize(), QIcon::Normal, QIcon::Off);
         actionCombineFiles->setIcon(icon4);
         actionClose = new QAction(MainWindow);
         actionClose->setObjectName(QString::fromUtf8("actionClose"));
         QIcon icon5;
-        icon5.addPixmap(QPixmap(QString::fromUtf8(":/new/prefix1/image/Crystal_Clear_action_exit.png")), QIcon::Normal, QIcon::Off);
+        icon5.addFile(QString::fromUtf8(":/new/prefix1/image/Crystal_Clear_action_exit.png"), QSize(), QIcon::Normal, QIcon::Off);
         actionClose->setIcon(icon5);
         actionAbout_QT = new QAction(MainWindow);
         actionAbout_QT->setObjectName(QString::fromUtf8("actionAbout_QT"));
         QIcon icon6;
-        icon6.addPixmap(QPixmap(QString::fromUtf8(":/new/prefix1/image/Torchlight_qt.png")), QIcon::Normal, QIcon::Off);
+        icon6.addFile(QString::fromUtf8(":/new/prefix1/image/Torchlight_qt.png"), QSize(), QIcon::Normal, QIcon::Off);
         actionAbout_QT->setIcon(icon6);
         actionShotLine = new QAction(MainWindow);
         actionShotLine->setObjectName(QString::fromUtf8("actionShotLine"));
         actionShotLine->setCheckable(true);
         QIcon icon7;
-        icon7.addPixmap(QPixmap(QString::fromUtf8(":/new/prefix1/image/32px-Crystal_Clear_mimetype_source_r.png")), QIcon::Normal, QIcon::Off);
+        icon7.addFile(QString::fromUtf8(":/new/prefix1/image/32px-Crystal_Clear_mimetype_source_r.png"), QSize(), QIcon::Normal, QIcon::Off);
         actionShotLine->setIcon(icon7);
         actionReceiveLine = new QAction(MainWindow);
         actionReceiveLine->setObjectName(QString::fromUtf8("actionReceiveLine"));
         actionReceiveLine->setCheckable(true);
         QIcon icon8;
-        icon8.addPixmap(QPixmap(QString::fromUtf8(":/new/prefix1/image/receiveline.png")), QIcon::Normal, QIcon::Off);
+        icon8.addFile(QString::fromUtf8(":/new/prefix1/image/receiveline.png"), QSize(), QIcon::Normal, QIcon::Off);
         actionReceiveLine->setIcon(icon8);
         actionFoldNumbers = new QAction(MainWindow);
         actionFoldNumbers->setObjectName(QString::fromUtf8("actionFoldNumbers"));
@@ -121,24 +121,24 @@ public:
         actionShotPointLine->setObjectName(QString::fromUtf8("actionShotPointLine"));
         actionShotPointLine->setCheckable(true);
         QIcon icon9;
-        icon9.addPixmap(QPixmap(QString::fromUtf8(":/new/prefix1/image/s.png")), QIcon::Normal, QIcon::Off);
+        icon9.addFile(QString::fromUtf8(":/new/prefix1/image/s.png"), QSize(), QIcon::Normal, QIcon::Off);
         actionShotPointLine->setIcon(icon9);
         actionReceivePointLine = new QAction(MainWindow);
         actionReceivePointLine->setObjectName(QString::fromUtf8("actionReceivePointLine"));
         actionReceivePointLine->setCheckable(true);
         actionReceivePointLine->setEnabled(true);
         QIcon icon10;
-        icon10.addPixmap(QPixmap(QString::fromUtf8(":/new/prefix1/image/r.png")), QIcon::Normal, QIcon::Off);
+        icon10.addFile(QString::fromUtf8(":/new/prefix1/image/r.png"), QSize(), QIcon::Normal, QIcon::Off);
         actionReceivePointLine->setIcon(icon10);
         actionOption = new QAction(MainWindow);
         actionOption->setObjectName(QString::fromUtf8("actionOption"));
         QIcon icon11;
-        icon11.addPixmap(QPixmap(QString::fromUtf8(":/new/prefix1/image/gnome-stock-gnome-run.png")), QIcon::Normal, QIcon::Off);
+        icon11.addFile(QString::fromUtf8(":/new/prefix1/image/gnome-stock-gnome-run.png"), QSize(), QIcon::Normal, QIcon::Off);
         actionOption->setIcon(icon11);
         actionHelp = new QAction(MainWindow);
         actionHelp->setObjectName(QString::fromUtf8("actionHelp"));
         QIcon icon12;
-        icon12.addPixmap(QPixmap(QString::fromUtf8(":/new/prefix1/image/Torchlight_help.png")), QIcon::Normal, QIcon::Off);
+        icon12.addFile(QString::fromUtf8(":/new/prefix1/image/Torchlight_help.png"), QSize(), QIcon::Normal, QIcon::Off);
         actionHelp->setIcon(icon12);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));

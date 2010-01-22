@@ -1,8 +1,8 @@
 /********************************************************************************
 ** Form generated from reading ui file 'help.ui'
 **
-** Created: Fri Dec 25 11:10:16 2009
-**      by: Qt User Interface Compiler version 4.5.1
+** Created: Fri Jan 22 10:35:19 2010
+**      by: Qt User Interface Compiler version 4.5.3
 **
 ** WARNING! All changes made in this file will be lost when recompiling ui file!
 ********************************************************************************/
@@ -211,7 +211,7 @@ public:
         toolButton->setObjectName(QString::fromUtf8("toolButton"));
         toolButton->setMinimumSize(QSize(40, 40));
         QIcon icon;
-        icon.addPixmap(QPixmap(QString::fromUtf8(":/new/prefix1/image/32px-Crystal_Clear_app_database.png")), QIcon::Normal, QIcon::Off);
+        icon.addFile(QString::fromUtf8(":/new/prefix1/image/32px-Crystal_Clear_app_database.png"), QSize(), QIcon::Normal, QIcon::Off);
         toolButton->setIcon(icon);
         toolButton->setIconSize(QSize(32, 32));
 
@@ -231,7 +231,7 @@ public:
         toolButton_2->setObjectName(QString::fromUtf8("toolButton_2"));
         toolButton_2->setMinimumSize(QSize(40, 40));
         QIcon icon1;
-        icon1.addPixmap(QPixmap(QString::fromUtf8(":/new/prefix1/image/Crystal_Clear_action_reload.png")), QIcon::Normal, QIcon::Off);
+        icon1.addFile(QString::fromUtf8(":/new/prefix1/image/Crystal_Clear_action_reload.png"), QSize(), QIcon::Normal, QIcon::Off);
         toolButton_2->setIcon(icon1);
         toolButton_2->setIconSize(QSize(32, 32));
 
@@ -251,7 +251,7 @@ public:
         toolButton_3->setObjectName(QString::fromUtf8("toolButton_3"));
         toolButton_3->setMinimumSize(QSize(40, 40));
         QIcon icon2;
-        icon2.addPixmap(QPixmap(QString::fromUtf8(":/new/prefix1/image/32px-Crystal_Clear_mimetype_source_r.png")), QIcon::Normal, QIcon::Off);
+        icon2.addFile(QString::fromUtf8(":/new/prefix1/image/32px-Crystal_Clear_mimetype_source_r.png"), QSize(), QIcon::Normal, QIcon::Off);
         toolButton_3->setIcon(icon2);
         toolButton_3->setIconSize(QSize(32, 32));
 
@@ -261,7 +261,7 @@ public:
         toolButton_4->setObjectName(QString::fromUtf8("toolButton_4"));
         toolButton_4->setMinimumSize(QSize(40, 40));
         QIcon icon3;
-        icon3.addPixmap(QPixmap(QString::fromUtf8(":/new/prefix1/image/receiveline.png")), QIcon::Normal, QIcon::Off);
+        icon3.addFile(QString::fromUtf8(":/new/prefix1/image/receiveline.png"), QSize(), QIcon::Normal, QIcon::Off);
         toolButton_4->setIcon(icon3);
         toolButton_4->setIconSize(QSize(32, 32));
 
@@ -281,7 +281,7 @@ public:
         toolButton_5->setObjectName(QString::fromUtf8("toolButton_5"));
         toolButton_5->setMinimumSize(QSize(40, 40));
         QIcon icon4;
-        icon4.addPixmap(QPixmap(QString::fromUtf8(":/new/prefix1/image/s.png")), QIcon::Normal, QIcon::Off);
+        icon4.addFile(QString::fromUtf8(":/new/prefix1/image/s.png"), QSize(), QIcon::Normal, QIcon::Off);
         toolButton_5->setIcon(icon4);
         toolButton_5->setIconSize(QSize(32, 32));
 
@@ -291,7 +291,7 @@ public:
         toolButton_6->setObjectName(QString::fromUtf8("toolButton_6"));
         toolButton_6->setMinimumSize(QSize(40, 40));
         QIcon icon5;
-        icon5.addPixmap(QPixmap(QString::fromUtf8(":/new/prefix1/image/r.png")), QIcon::Normal, QIcon::Off);
+        icon5.addFile(QString::fromUtf8(":/new/prefix1/image/r.png"), QSize(), QIcon::Normal, QIcon::Off);
         toolButton_6->setIcon(icon5);
         toolButton_6->setIconSize(QSize(32, 32));
 
@@ -311,7 +311,7 @@ public:
         toolButton_7->setObjectName(QString::fromUtf8("toolButton_7"));
         toolButton_7->setMinimumSize(QSize(40, 40));
         QIcon icon6;
-        icon6.addPixmap(QPixmap(QString::fromUtf8(":/new/prefix1/image/sr.png")), QIcon::Normal, QIcon::Off);
+        icon6.addFile(QString::fromUtf8(":/new/prefix1/image/sr.png"), QSize(), QIcon::Normal, QIcon::Off);
         toolButton_7->setIcon(icon6);
         toolButton_7->setIconSize(QSize(32, 32));
 
@@ -373,7 +373,7 @@ public:
         toolButton_10->setObjectName(QString::fromUtf8("toolButton_10"));
         toolButton_10->setMinimumSize(QSize(40, 40));
         QIcon icon7;
-        icon7.addPixmap(QPixmap(QString::fromUtf8(":/new/prefix1/image/gnome-stock-gnome-run.png")), QIcon::Normal, QIcon::Off);
+        icon7.addFile(QString::fromUtf8(":/new/prefix1/image/gnome-stock-gnome-run.png"), QSize(), QIcon::Normal, QIcon::Off);
         toolButton_10->setIcon(icon7);
         toolButton_10->setIconSize(QSize(32, 32));
 

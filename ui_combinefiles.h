@@ -1,8 +1,8 @@
 /********************************************************************************
 ** Form generated from reading ui file 'combinefiles.ui'
 **
-** Created: Fri Dec 25 11:10:16 2009
-**      by: Qt User Interface Compiler version 4.5.1
+** Created: Fri Jan 22 10:35:19 2010
+**      by: Qt User Interface Compiler version 4.5.3
 **
 ** WARNING! All changes made in this file will be lost when recompiling ui file!
 ********************************************************************************/
@@ -58,7 +58,7 @@ public:
         CombineFiles->setWindowModality(Qt::ApplicationModal);
         CombineFiles->resize(526, 293);
         QIcon icon;
-        icon.addPixmap(QPixmap(QString::fromUtf8("images/WinRAR.png")), QIcon::Normal, QIcon::Off);
+        icon.addFile(QString::fromUtf8("images/WinRAR.png"), QSize(), QIcon::Normal, QIcon::Off);
         CombineFiles->setWindowIcon(icon);
         gridLayout = new QGridLayout(CombineFiles);
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
@@ -81,7 +81,7 @@ public:
         btnAdd = new QPushButton(groupBox2);
         btnAdd->setObjectName(QString::fromUtf8("btnAdd"));
         QIcon icon1;
-        icon1.addPixmap(QPixmap(QString::fromUtf8(":/new/prefix1/image/32px-Crystal_Clear_action_db_add.png")), QIcon::Normal, QIcon::Off);
+        icon1.addFile(QString::fromUtf8(":/new/prefix1/image/32px-Crystal_Clear_action_db_add.png"), QSize(), QIcon::Normal, QIcon::Off);
         btnAdd->setIcon(icon1);
         btnAdd->setIconSize(QSize(30, 30));
 
@@ -90,7 +90,7 @@ public:
         btnDel = new QPushButton(groupBox2);
         btnDel->setObjectName(QString::fromUtf8("btnDel"));
         QIcon icon2;
-        icon2.addPixmap(QPixmap(QString::fromUtf8(":/new/prefix1/image/32px-Crystal_Clear_action_db_remove.png")), QIcon::Normal, QIcon::Off);
+        icon2.addFile(QString::fromUtf8(":/new/prefix1/image/32px-Crystal_Clear_action_db_remove.png"), QSize(), QIcon::Normal, QIcon::Off);
         btnDel->setIcon(icon2);
         btnDel->setIconSize(QSize(30, 30));
 
@@ -121,7 +121,7 @@ public:
         btnCombineFile = new QPushButton(groupBox3);
         btnCombineFile->setObjectName(QString::fromUtf8("btnCombineFile"));
         QIcon icon3;
-        icon3.addPixmap(QPixmap(QString::fromUtf8(":/new/prefix1/image/32px-Crystal_Clear_action_db_update.png")), QIcon::Normal, QIcon::Off);
+        icon3.addFile(QString::fromUtf8(":/new/prefix1/image/32px-Crystal_Clear_action_db_update.png"), QSize(), QIcon::Normal, QIcon::Off);
         btnCombineFile->setIcon(icon3);
         btnCombineFile->setIconSize(QSize(30, 30));
 
@@ -143,7 +143,7 @@ public:
         btnReset->setObjectName(QString::fromUtf8("btnReset"));
         btnReset->setMinimumSize(QSize(100, 0));
         QIcon icon4;
-        icon4.addPixmap(QPixmap(QString::fromUtf8(":/new/prefix1/image/Crystal_Clear_action_decrypted.png")), QIcon::Normal, QIcon::Off);
+        icon4.addFile(QString::fromUtf8(":/new/prefix1/image/Crystal_Clear_action_decrypted.png"), QSize(), QIcon::Normal, QIcon::Off);
         btnReset->setIcon(icon4);
 
         horizontalLayout_4->addWidget(btnReset);
@@ -152,7 +152,7 @@ public:
         btnOK->setObjectName(QString::fromUtf8("btnOK"));
         btnOK->setMinimumSize(QSize(100, 0));
         QIcon icon5;
-        icon5.addPixmap(QPixmap(QString::fromUtf8(":/new/prefix1/image/Crystal_Clear_action_apply.png")), QIcon::Normal, QIcon::Off);
+        icon5.addFile(QString::fromUtf8(":/new/prefix1/image/Crystal_Clear_action_apply.png"), QSize(), QIcon::Normal, QIcon::Off);
         btnOK->setIcon(icon5);
 
         horizontalLayout_4->addWidget(btnOK);
@@ -161,7 +161,7 @@ public:
         btnCancel->setObjectName(QString::fromUtf8("btnCancel"));
         btnCancel->setMinimumSize(QSize(100, 0));
         QIcon icon6;
-        icon6.addPixmap(QPixmap(QString::fromUtf8(":/new/prefix1/image/Crystal_Clear_action_button_cancel.png")), QIcon::Normal, QIcon::Off);
+        icon6.addFile(QString::fromUtf8(":/new/prefix1/image/Crystal_Clear_action_button_cancel.png"), QSize(), QIcon::Normal, QIcon::Off);
         btnCancel->setIcon(icon6);
 
         horizontalLayout_4->addWidget(btnCancel);

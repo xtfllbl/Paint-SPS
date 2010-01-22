@@ -1,8 +1,8 @@
 /********************************************************************************
 ** Form generated from reading ui file 'option.ui'
 **
-** Created: Fri Dec 25 13:11:21 2009
-**      by: Qt User Interface Compiler version 4.5.1
+** Created: Fri Jan 22 10:35:19 2010
+**      by: Qt User Interface Compiler version 4.5.3
 **
 ** WARNING! All changes made in this file will be lost when recompiling ui file!
 ********************************************************************************/
@@ -282,7 +282,7 @@ public:
         radioSL_Add = new QRadioButton(groupBox);
         radioSL_Add->setObjectName(QString::fromUtf8("radioSL_Add"));
         QIcon icon;
-        icon.addPixmap(QPixmap(QString::fromUtf8(":/new/prefix1/image/plus.png")), QIcon::Normal, QIcon::Off);
+        icon.addFile(QString::fromUtf8(":/new/prefix1/image/plus.png"), QSize(), QIcon::Normal, QIcon::Off);
         radioSL_Add->setIcon(icon);
 
         gridLayout_3->addWidget(radioSL_Add, 1, 2, 1, 1);
@@ -290,7 +290,7 @@ public:
         radioSL_Mul = new QRadioButton(groupBox);
         radioSL_Mul->setObjectName(QString::fromUtf8("radioSL_Mul"));
         QIcon icon1;
-        icon1.addPixmap(QPixmap(QString::fromUtf8(":/new/prefix1/image/wrong.png")), QIcon::Normal, QIcon::Off);
+        icon1.addFile(QString::fromUtf8(":/new/prefix1/image/wrong.png"), QSize(), QIcon::Normal, QIcon::Off);
         radioSL_Mul->setIcon(icon1);
 
         gridLayout_3->addWidget(radioSL_Mul, 1, 3, 1, 1);
@@ -298,7 +298,7 @@ public:
         radioSL_Box = new QRadioButton(groupBox);
         radioSL_Box->setObjectName(QString::fromUtf8("radioSL_Box"));
         QIcon icon2;
-        icon2.addPixmap(QPixmap(QString::fromUtf8(":/new/prefix1/image/fang.png")), QIcon::Normal, QIcon::Off);
+        icon2.addFile(QString::fromUtf8(":/new/prefix1/image/fang.png"), QSize(), QIcon::Normal, QIcon::Off);
         radioSL_Box->setIcon(icon2);
 
         gridLayout_3->addWidget(radioSL_Box, 1, 4, 1, 1);
@@ -767,7 +767,7 @@ public:
         btnApply = new QPushButton(Option);
         btnApply->setObjectName(QString::fromUtf8("btnApply"));
         QIcon icon3;
-        icon3.addPixmap(QPixmap(QString::fromUtf8(":/new/prefix1/image/Crystal_Clear_action_reload.png")), QIcon::Normal, QIcon::Off);
+        icon3.addFile(QString::fromUtf8(":/new/prefix1/image/Crystal_Clear_action_reload.png"), QSize(), QIcon::Normal, QIcon::Off);
         btnApply->setIcon(icon3);
 
         horizontalLayout_3->addWidget(btnApply);
@@ -775,7 +775,7 @@ public:
         btnClose = new QPushButton(Option);
         btnClose->setObjectName(QString::fromUtf8("btnClose"));
         QIcon icon4;
-        icon4.addPixmap(QPixmap(QString::fromUtf8(":/new/prefix1/image/Crystal_Clear_action_button_cancel.png")), QIcon::Normal, QIcon::Off);
+        icon4.addFile(QString::fromUtf8(":/new/prefix1/image/Crystal_Clear_action_button_cancel.png"), QSize(), QIcon::Normal, QIcon::Off);
         btnClose->setIcon(icon4);
 
         horizontalLayout_3->addWidget(btnClose);
