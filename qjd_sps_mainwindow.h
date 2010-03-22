@@ -32,13 +32,7 @@ public:
     Ui::MainWindow *ui;
     QVector<QVector<int> > testAB;
 
-
     bool openS;
-
-    // QRect rubberBandRect;
-    int i;
-    int j;
-    int k;
 
     char *EstS;
     char *NorS;
@@ -61,9 +55,10 @@ private:
     int VBarValue;
     int HBarMax;
     int VBarMax;
-    QFile fp;
-    QFile fb;
-    QFile fx;
+    QFile fsps;
+    QFile frps;
+    QFile fxps;
+
     QFile f1;
     QFile f2;
     QFile f3;
@@ -85,7 +80,13 @@ private:
 
     QPoint point;
 
-    int finalLine;
+    int firstLineS;
+    int firstLineR;
+    int firstLineX;
+    int finalLineS;
+    int finalLineR;
+    int finalLineX;
+
     int file2FinalLine;
     bool isWindowsEnter;
     bool file2IsWindowsEnter;

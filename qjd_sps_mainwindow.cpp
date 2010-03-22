@@ -191,17 +191,17 @@ void qjdMainWindow::frontOpen()
         openfile->RfileName = openfile->m_ui->lineRFile->text();
         openfile->XfileName = openfile->m_ui->lineXFile->text();
 
-        fp.setFileName(openfile->SfileName);
-        fb.setFileName(openfile->RfileName);
-        fx.setFileName(openfile->XfileName);
-        if (!fp.open(QIODevice::ReadOnly))
-            fp.close();
-        if (!fb.open(QIODevice::ReadOnly))
-            fb.close();
-        if (!fx.open(QIODevice::ReadOnly))
-            fx.close();
+        fsps.setFileName(openfile->SfileName);
+        frps.setFileName(openfile->RfileName);
+        fxps.setFileName(openfile->XfileName);
+        if (!fsps.open(QIODevice::ReadOnly))
+            fsps.close();
+        if (!frps.open(QIODevice::ReadOnly))
+            frps.close();
+        if (!fxps.open(QIODevice::ReadOnly))
+            fxps.close();
 
-        setWindowTitle(tr("SPS File Show ---- ")+fp.fileName());
+        setWindowTitle(tr("SPS File Show ---- ")+fsps.fileName());
         openS=true;
         ui->actionRelation->setEnabled(true);
         ui->actionRelation->setChecked(false);
@@ -319,32 +319,106 @@ void qjdMainWindow::on_actionOpen_triggered()
 
 void qjdMainWindow::setFileLocation()
 {
+    /// windows是回车换行'\r\n',linux下面为'\n'
     isWindowsEnter=0;
     QByteArray str;
     QByteArray rn;
 
-    //判断fp文件回车字符的字节数
-    fp.seek(80);
-    rn=fp.read(2);
+    //判断S文件回车字符的字节数
+    fsps.seek(80);
+    rn=fsps.read(2);
     if(rn=="\r\n")
     {
         isWindowsEnter=1;
     }
-    //找到fp文件的数据起始位置
-    fp.seek(0);
-    for(finalLine=1;finalLine<200;finalLine++)
+    //找到S文件的数据起始位置
+    fsps.seek(0);
+    for(firstLineS=1;firstLineS<200;firstLineS++)
     {
-        str=fp.read(1);
+        str=fsps.read(1);
         if(str=="S"||str=="X"||str=="R")
         {
             break;
         }
-        fp.seek(fp.pos()+80+isWindowsEnter);
+        fsps.seek(fsps.pos()+80+isWindowsEnter);
     }
-    finalLine=finalLine-1;
+    firstLineS=firstLineS-1;
+
+    //找到R文件的数据起始位置
+    frps.seek(0);
+    for(firstLineR=1;firstLineR<200;firstLineR++)
+    {
+        str=frps.read(1);
+        if(str=="S"||str=="X"||str=="R")
+        {
+            break;
+        }
+        frps.seek(frps.pos()+80+isWindowsEnter);
+    }
+    firstLineR=firstLineR-1;
+
+    //找到X文件的数据起始位置
+    fxps.seek(0);
+    for(firstLineX=1;firstLineX<200;firstLineX++)
+    {
+        str=fxps.read(1);
+        if(str=="S"||str=="X"||str=="R")
+        {
+            break;
+        }
+        fxps.seek(fxps.pos()+80+isWindowsEnter);
+    }
+    firstLineX=firstLineX-1;
+
+    finalLineS=0;
+    finalLineR=0;
+    finalLineX=0;
+    my->SNumber=0;
+    my->RNumber=0;
+    my->XNumber=0;
+    //找到S文件的数据结束位置
+    fsps.seek(0);
+    while(!fsps.atEnd())
+    {
+        str=fsps.read(1);
+        if(str=="")
+        {
+            break;
+        }
+        fsps.seek(fsps.pos()+80+isWindowsEnter);
+        finalLineS++;
+    }
+    //找到R文件的数据结束位置
+    frps.seek(0);
+    while(!frps.atEnd())
+    {
+        str=frps.read(1);
+        if(str=="")
+        {
+            break;
+        }
+        frps.seek(frps.pos()+80+isWindowsEnter);
+        finalLineR++;
+    }
+    //找到X文件的数据结束位置
+    fxps.seek(0);
+    while(!fxps.atEnd())
+    {
+        str=fxps.read(1);
+        if(str=="")
+        {
+            break;
+        }
+        fxps.seek(fxps.pos()+80+isWindowsEnter);
+        finalLineX++;
+    }
+    my->SNumber=finalLineS-firstLineS;
+    my->RNumber=finalLineR-firstLineR;
+    my->XNumber=finalLineX-firstLineX;
+    qDebug()<<finalLineS<<finalLineR<<finalLineX;
+    qDebug()<<firstLineS<<firstLineR<<firstLineX;
+    qDebug()<<my->SNumber<<my->RNumber<<my->XNumber;
 }
-
-
 
 void qjdMainWindow::mouseMoveEvent ( QMouseEvent *event )
 {
@@ -562,10 +636,6 @@ void qjdMainWindow::mouseReleaseEvent ( QMouseEvent *event )
 
 void qjdMainWindow::setData()
 {
-    i=0;
-    j=0;
-    k=0;
-
     my->maxE=0;
     my->minE=1000000;
     my->maxN=0;
@@ -595,14 +665,6 @@ void qjdMainWindow::setData()
         plusEnter=1;
 
     //----------------------S文件数据处理---------------------//
-    my->SNumber=0;
-    fp.seek(finalLine*(81+plusEnter));
-
-    while(!fp.atEnd())
-    {
-        my->SNumber++;
-        fp.seek(fp.pos()+81+plusEnter);
-    }
     my->slinename.resize(my->SNumber);
     my->spointnumber.resize(my->SNumber);
     my->estS.resize(my->SNumber);
@@ -610,20 +672,20 @@ void qjdMainWindow::setData()
     my->estDrawS.resize(my->SNumber);
     my->norDrawS.resize(my->SNumber);
 
-    fp.seek(finalLine*(81+plusEnter)+1);
-    while(!fp.atEnd())
+    fsps.seek(firstLineS*(81+plusEnter)+1);
+//    while(!fsps.atEnd())
+    for(int i=0;i<my->SNumber;i++)
     {
-
-        fp.readLine(Slinename,17);
+        fsps.readLine(Slinename,17);
         my->slinename[i]=atof(Slinename);
-        fp.readLine(Spointnumber,9);
+        fsps.readLine(Spointnumber,9);
         my->spointnumber[i]=atof(Spointnumber);
 
 //        qDebug()<<Slinename;
-        fp.seek(fp.pos()+21);
-        fp.readLine(EstS,10);
+        fsps.seek(fsps.pos()+21);
+        fsps.readLine(EstS,10);
         my->estS[i]=atof(EstS);
-        fp.readLine(NorS,11);
+        fsps.readLine(NorS,11);
         my->norS[i]=atof(NorS);
         //qDebug()<<my->slinename[i]<<my->spointnumber[i]<<my->estS[i]<<my->norS[i];
 
@@ -642,19 +704,16 @@ void qjdMainWindow::setData()
         else if(my->slinename[i]>my->maxSN)
             my->maxSN=(int)my->slinename[i];
 
-        i++;
-
-        fp.seek(fp.pos()+17+plusEnter);
+        fsps.seek(fsps.pos()+17+plusEnter);
     }
     ////------------------------R文件数据处理---------------------------//
-    my->RNumber=0;
-    fb.seek(finalLine*(81+plusEnter));
-
-    while(!fb.atEnd())
-    {
-        my->RNumber++;
-        fb.seek(fb.pos()+81+plusEnter);
-    }
+//    my->RNumber=0;
+//    frps.seek(firstLineR*(81+plusEnter));
+//    while(!frps.atEnd())
+//    {
+//        my->RNumber++;
+//        frps.seek(frps.pos()+81+plusEnter);
+//    }
     my->rlinename.resize(my->RNumber);
     my->rpointnumber.resize(my->RNumber);
     my->estR.resize(my->RNumber);
@@ -662,18 +721,19 @@ void qjdMainWindow::setData()
     my->estDrawR.resize(my->RNumber);
     my->norDrawR.resize(my->RNumber);
 
-    fb.seek(finalLine*(81+plusEnter)+1);
-    while(!fb.atEnd())
+    frps.seek(firstLineR*(81+plusEnter)+1);
+//    while(!frps.atEnd())
+    for(int j=0;j<my->RNumber;j++)
     {
-        fb.readLine(Rlinename,17);
+        frps.readLine(Rlinename,17);
         my->rlinename[j]=atof(Rlinename);
-        fb.readLine(Rpointnumber,9);
+        frps.readLine(Rpointnumber,9);
         my->rpointnumber[j]=atof(Rpointnumber);
 
-        fb.seek(fb.pos()+21);
-        fb.readLine(EstR,10);
+        frps.seek(frps.pos()+21);
+        frps.readLine(EstR,10);
         my->estR[j]=atof(EstR);
-        fb.readLine(NorR,11);
+        frps.readLine(NorR,11);
         my->norR[j]=atof(NorR);
         //qDebug()<<my->rlinename[j]<<my->rpointnumber[j]<<my->estR[j]<<my->norR[j];
 
@@ -692,9 +752,9 @@ void qjdMainWindow::setData()
         else if(my->rlinename[j]>my->maxRN)
             my->maxRN=(int)my->rlinename[j];
         //qDebug()<<"max"<<my->maxN<<"min"<<my->minN;
-        j++;
+//        j++;
 
-        fb.seek(fb.pos()+17+plusEnter);
+        frps.seek(frps.pos()+17+plusEnter);
     }
     my->wid=my->maxE-my->minE;
     my->hei=my->maxN-my->minN;
@@ -709,48 +769,48 @@ void qjdMainWindow::setData()
 
 //    qDebug()<<my->drawWid<<my->drawHei;
     ////------------------------X文件数据处理----------------------//
-    my->XNumber=0;
-    fx.seek(finalLine*(81+plusEnter));
-
-    while(!fx.atEnd())
-    {
-        my->XNumber++;
-        fx.seek(fx.pos()+81+plusEnter);
-    }
+//    my->XNumber=0;
+//    fxps.seek(firstLineX*(81+plusEnter));
+//    while(!fxps.atEnd())
+//    {
+//        my->XNumber++;
+//        fxps.seek(fxps.pos()+81+plusEnter);
+//    }
     my->xlinename.resize(my->XNumber);
     my->xpointnumber.resize(my->XNumber);
     my->xreceivelinename.resize(my->XNumber);
     my->xfromreceiver.resize(my->XNumber);
     my->xtoreceiver.resize(my->XNumber);
 
-    fx.seek(finalLine*(81+plusEnter)+13);
-    while(!fx.atEnd())
+    fxps.seek(firstLineX*(81+plusEnter)+13);
+//    while(!fxps.atEnd())
+    for(int k=0;k<my->XNumber;k++)
     {
-        fx.readLine(Xlinename,17);
+        fxps.readLine(Xlinename,17);
         my->xlinename[k]=atof(Xlinename);
 
-        fx.readLine(Xpointnumber,9);
+        fxps.readLine(Xpointnumber,9);
         my->xpointnumber[k]=atof(Xpointnumber);
 
-        fx.seek(fx.pos()+10);
+        fxps.seek(fxps.pos()+10);
 
-        fx.readLine(Xreceivelinename,17);
+        fxps.readLine(Xreceivelinename,17);
         my->xreceivelinename[k]=atof(Xreceivelinename);
 
-        fx.readLine(XFromreceiver,9);
+        fxps.readLine(XFromreceiver,9);
         my->xfromreceiver[k]=atof(XFromreceiver);
 
-        fx.readLine(XToreceiver,9);
+        fxps.readLine(XToreceiver,9);
         my->xtoreceiver[k]=atof(XToreceiver);
         //qDebug()<<my->xlinename[k]<<my->xpointnumber[k]<<my->xreceivelinename[k]<<my->xfromreceiver[k]<<my->xtoreceiver[k];
-        k++;
+//        k++;
 
-        fx.seek(fx.pos()+15+plusEnter);
+        fxps.seek(fxps.pos()+15+plusEnter);
     }
     //  qDebug()<<my->SNumber<<my->RNumber<<my->XNumber;
-    fp.close();
-    fb.close();
-    fx.close();
+    fsps.close();
+    frps.close();
+    fxps.close();
 
 }
 
