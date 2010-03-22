@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>840</width>
+    <height>800</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>530</width>
+    <height>620</height>
+   </size>
+  </property>
+  <property name="sizeIncrement">
+   <size>
+    <width>10</width>
+    <height>10</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>SPS file show</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>images/report.png</normaloff>images/report.png</iconset>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0">
+     <widget class="QWidget" name="mainw" native="true"/>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>840</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="actionOpen"/>
+    <addaction name="actionCombineFiles"/>
+    <addaction name="separator"/>
+    <addaction name="actionClose"/>
+   </widget>
+   <widget class="QMenu" name="menuAbout">
+    <property name="title">
+     <string>Help</string>
+    </property>
+    <addaction name="actionHelp"/>
+    <addaction name="actionAbout_QT"/>
+   </widget>
+   <widget class="QMenu" name="menuView">
+    <property name="title">
+     <string>View</string>
+    </property>
+    <addaction name="actionReset"/>
+    <addaction name="separator"/>
+    <addaction name="actionRelation"/>
+    <addaction name="actionShotLine"/>
+    <addaction name="actionReceiveLine"/>
+    <addaction name="separator"/>
+    <addaction name="actionCMP"/>
+    <addaction name="actionFoldNumbers"/>
+    <addaction name="separator"/>
+    <addaction name="actionOption"/>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menuView"/>
+   <addaction name="menuAbout"/>
+  </widget>
+  <widget class="QToolBar" name="mainToolBar">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="toolTip">
+    <string/>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="actionOpen"/>
+   <addaction name="actionCombineFiles"/>
+   <addaction name="separator"/>
+   <addaction name="actionReset"/>
+   <addaction name="separator"/>
+   <addaction name="actionShotLine"/>
+   <addaction name="actionReceiveLine"/>
+   <addaction name="actionShotPointLine"/>
+   <addaction name="actionReceivePointLine"/>
+   <addaction name="actionRelation"/>
+   <addaction name="separator"/>
+   <addaction name="actionCMP"/>
+   <addaction name="actionFoldNumbers"/>
+   <addaction name="separator"/>
+   <addaction name="actionOption"/>
+   <addaction name="separator"/>
+   <addaction name="actionHelp"/>
+   <addaction name="actionClose"/>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+  <action name="actionOpen">
+   <property name="icon">
+    <iconset>
+     <normaloff>:/new/prefix1/image/Nuvola_filesystems_folder_yellow_open.png</normaloff>:/new/prefix1/image/Nuvola_filesystems_folder_yellow_open.png</iconset>
+   </property>
+   <property name="text">
+    <string>Open</string>
+   </property>
+   <property name="iconText">
+    <string>OpenS</string>
+   </property>
+   <property name="toolTip">
+    <string>Open SPS Files</string>
+   </property>
+   <property name="shortcut">
+    <string>F1</string>
+   </property>
+  </action>
+  <action name="actionReset">
+   <property name="icon">
+    <iconset>
+     <normaloff>:/new/prefix1/image/Crystal_Clear_action_reload.png</normaloff>:/new/prefix1/image/Crystal_Clear_action_reload.png</iconset>
+   </property>
+   <property name="text">
+    <string>Reset</string>
+   </property>
+   <property name="toolTip">
+    <string>Reset the image</string>
+   </property>
+   <property name="shortcut">
+    <string>F5</string>
+   </property>
+  </action>
+  <action name="actionRelation">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normaloff>:/new/prefix1/image/sr.png</normaloff>:/new/prefix1/image/sr.png</iconset>
+   </property>
+   <property name="text">
+    <string>Relation</string>
+   </property>
+   <property name="toolTip">
+    <string>Push me and then click the plus on the image, you`ll see the relation betweem shoot &amp; receive point
+</string>
+   </property>
+   <property name="shortcut">
+    <string>R</string>
+   </property>
+  </action>
+  <action name="actionCombineFiles">
+   <property name="icon">
+    <iconset>
+     <normaloff>:/new/prefix1/image/32px-Crystal_Clear_app_database.png</normaloff>:/new/prefix1/image/32px-Crystal_Clear_app_database.png</iconset>
+   </property>
+   <property name="text">
+    <string>Combine</string>
+   </property>
+   <property name="toolTip">
+    <string>Combine Files Into One</string>
+   </property>
+   <property name="shortcut">
+    <string>F3</string>
+   </property>
+  </action>
+  <action name="actionClose">
+   <property name="icon">
+    <iconset>
+     <normaloff>:/new/prefix1/image/Crystal_Clear_action_exit.png</normaloff>:/new/prefix1/image/Crystal_Clear_action_exit.png</iconset>
+   </property>
+   <property name="text">
+    <string>Close</string>
+   </property>
+   <property name="shortcut">
+    <string>Esc</string>
+   </property>
+  </action>
+  <action name="actionAbout_QT">
+   <property name="icon">
+    <iconset>
+     <normaloff>:/new/prefix1/image/Torchlight_qt.png</normaloff>:/new/prefix1/image/Torchlight_qt.png</iconset>
+   </property>
+   <property name="text">
+    <string>About QT</string>
+   </property>
+  </action>
+  <action name="actionShotLine">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normaloff>:/new/prefix1/image/32px-Crystal_Clear_mimetype_source_r.png</normaloff>:/new/prefix1/image/32px-Crystal_Clear_mimetype_source_r.png</iconset>
+   </property>
+   <property name="text">
+    <string>Shoot Line</string>
+   </property>
+   <property name="toolTip">
+    <string>Show Shot Line</string>
+   </property>
+  </action>
+  <action name="actionReceiveLine">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normaloff>:/new/prefix1/image/receiveline.png</normaloff>:/new/prefix1/image/receiveline.png</iconset>
+   </property>
+   <property name="text">
+    <string>Receive Line</string>
+   </property>
+   <property name="toolTip">
+    <string>Show Receive Line</string>
+   </property>
+  </action>
+  <action name="actionFoldNumbers">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>FOLD</string>
+   </property>
+   <property name="toolTip">
+    <string>Show Fold Numbers</string>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>12</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="shortcut">
+    <string>F2</string>
+   </property>
+  </action>
+  <action name="actionCMP">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>CMP</string>
+   </property>
+   <property name="toolTip">
+    <string>show Fold Point</string>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>12</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+  </action>
+  <action name="actionShotPointLine">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normaloff>:/new/prefix1/image/s.png</normaloff>:/new/prefix1/image/s.png</iconset>
+   </property>
+   <property name="text">
+    <string>shotPointLine</string>
+   </property>
+  </action>
+  <action name="actionReceivePointLine">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normaloff>:/new/prefix1/image/r.png</normaloff>:/new/prefix1/image/r.png</iconset>
+   </property>
+   <property name="text">
+    <string>receivePointLine</string>
+   </property>
+  </action>
+  <action name="actionOption">
+   <property name="icon">
+    <iconset>
+     <normaloff>:/new/prefix1/image/gnome-stock-gnome-run.png</normaloff>:/new/prefix1/image/gnome-stock-gnome-run.png</iconset>
+   </property>
+   <property name="text">
+    <string>option</string>
+   </property>
+  </action>
+  <action name="actionHelp">
+   <property name="icon">
+    <iconset>
+     <normaloff>:/new/prefix1/image/Torchlight_help.png</normaloff>:/new/prefix1/image/Torchlight_help.png</iconset>
+   </property>
+   <property name="text">
+    <string>Help</string>
+   </property>
+  </action>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources/>
+ <connections/>
+</ui>
