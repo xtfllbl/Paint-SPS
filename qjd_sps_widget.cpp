@@ -172,6 +172,7 @@ void qjdWidget::paintSfileRelation(QPainter *painter)
         }
     }
     
+    qDebug()<<SNumber<<RNumber<<XNumber<<"~~~~~~";
     for(int b=0;b<XNumber;b++)
     {
         if(SLINENAME==xlinename[b] && SPOINTNUMBER==xpointnumber[b])
@@ -372,7 +373,6 @@ void qjdWidget::setCMP()  //设置覆盖次数像素点    //一次性设置
     axisXX.clear();
     axisYY.clear();
 
-    qDebug()<<SNumber<<RNumber<<XNumber;
     emit signalMaxSet(SNumber-1);
     for(int a=0;a<SNumber;a++)
     {

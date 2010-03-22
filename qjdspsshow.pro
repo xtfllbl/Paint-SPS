@@ -3,7 +3,9 @@
 # -------------------------------------------------
 TARGET = SPSShow
 TEMPLATE = app
-CONFIG += debug
+CONFIG += qt debug
+DEPENDPATH += . debug
+INCLUDEPATH += .
 SOURCES += main.cpp \
     qjd_sps_mainwindow.cpp \
     qjd_sps_widget.cpp \

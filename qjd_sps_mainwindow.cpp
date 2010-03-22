@@ -619,6 +619,7 @@ void qjdMainWindow::setData()
         fp.readLine(Spointnumber,9);
         my->spointnumber[i]=atof(Spointnumber);
 
+//        qDebug()<<Slinename;
         fp.seek(fp.pos()+21);
         fp.readLine(EstS,10);
         my->estS[i]=atof(EstS);
@@ -697,7 +698,7 @@ void qjdMainWindow::setData()
     }
     my->wid=my->maxE-my->minE;
     my->hei=my->maxN-my->minN;
-
+//    qDebug()<<my->maxN<<my->minN;
     my->minDrawE=my->minE-my->wid*0.1;
     my->maxDrawE=my->maxE+my->wid*0.1;
     my->minDrawN=my->minN-my->hei*0.1;
@@ -706,6 +707,7 @@ void qjdMainWindow::setData()
     my->drawWid=my->maxDrawE-my->minDrawE;
     my->drawHei=my->maxDrawN-my->minDrawN;
 
+//    qDebug()<<my->drawWid<<my->drawHei;
     ////------------------------X文件数据处理----------------------//
     my->XNumber=0;
     fx.seek(finalLine*(81+plusEnter));
