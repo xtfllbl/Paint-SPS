@@ -370,9 +370,6 @@ void qjdMainWindow::setFileLocation()
     }
     firstLineX=firstLineX-1;
 
-    finalLineS=0;
-    finalLineR=0;
-    finalLineX=0;
     my->SNumber=0;
     my->RNumber=0;
     my->XNumber=0;
@@ -381,41 +378,36 @@ void qjdMainWindow::setFileLocation()
     while(!fsps.atEnd())
     {
         str=fsps.read(1);
-        if(str=="")
+        if(str=="S")
         {
-            break;
+            my->SNumber++;
         }
         fsps.seek(fsps.pos()+80+isWindowsEnter);
-        finalLineS++;
     }
+    qDebug()<<finalLineS;
+
     //找到R文件的数据结束位置
     frps.seek(0);
     while(!frps.atEnd())
     {
         str=frps.read(1);
-        if(str=="")
+        if(str=="R")
         {
-            break;
+            my->RNumber++;
         }
         frps.seek(frps.pos()+80+isWindowsEnter);
-        finalLineR++;
     }
     //找到X文件的数据结束位置
     fxps.seek(0);
     while(!fxps.atEnd())
     {
         str=fxps.read(1);
-        if(str=="")
+        if(str=="X")
         {
-            break;
+            my->XNumber++;
         }
         fxps.seek(fxps.pos()+80+isWindowsEnter);
-        finalLineX++;
     }
-    my->SNumber=finalLineS-firstLineS;
-    my->RNumber=finalLineR-firstLineR;
-    my->XNumber=finalLineX-firstLineX;
-    qDebug()<<finalLineS<<finalLineR<<finalLineX;
     qDebug()<<firstLineS<<firstLineR<<firstLineX;
     qDebug()<<my->SNumber<<my->RNumber<<my->XNumber;
 }
