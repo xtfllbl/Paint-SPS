@@ -16,6 +16,7 @@ public:
     explicit qjdCombineFiles(QWidget *parent = 0);
     virtual ~qjdCombineFiles();
     Ui::CombineFiles *m_ui;
+    void reset();       // 合并结束后清空
 
     QString fileName1;
     QString fileName2;

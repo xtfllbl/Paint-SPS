@@ -114,7 +114,7 @@ void qjdWidget::paintMrRight(QPainter *painter)
 {
     for(int a=0;a<SNumber;a++)
     {
-        if(mr<estS[a]+50 && mr>estS[a]-50 && miss<norS[a]+50 && miss>norS[a]-50)
+        if(mr<estS[a]+20 && mr>estS[a]-20 && miss<norS[a]+30 && miss>norS[a]-30)
         {
             MrRight=(estS[a]-minDrawE)/drawWid*(width());
             MissRight=(norS[a]-minDrawN)/drawHei*(height());
@@ -123,7 +123,7 @@ void qjdWidget::paintMrRight(QPainter *painter)
     }
     for(int a=0;a<RNumber;a++)
     {
-        if (mr<estR[a]+20 && mr>estR[a]-20 && miss<norR[a]+20 && miss>norR[a]-20)
+        if (mr<estR[a]+10 && mr>estR[a]-10 && miss<norR[a]+20 && miss>norR[a]-20)
         {
             MrRight=(estR[a]-minDrawE)/drawWid*(width());
             MissRight=(norR[a]-minDrawN)/drawHei*(height());
@@ -164,8 +164,8 @@ void qjdWidget::paintSfileRelation(QPainter *painter)
     }
     for(int a=0;a<SNumber;a++)
     {
-        if(mr<estS[a]+50 && mr>estS[a]-50
-           && miss<norS[a]+50 && miss>norS[a]-50)
+        if(mr<estS[a]+20 && mr>estS[a]-20
+           && miss<norS[a]+30 && miss>norS[a]-30)
         {
             SLINENAME=slinename[a];
             SPOINTNUMBER=spointnumber[a];
@@ -225,7 +225,7 @@ void qjdWidget::paintRfileRelation(QPainter *painter)
     }
     for(int a=0;a<RNumber;a++)
     {
-        if(mr<estR[a]+20 && mr>estR[a]-20
+        if(mr<estR[a]+10 && mr>estR[a]-10
            && miss<norR[a]+20 && miss>norR[a]-20)
         {
             RLINENAME=rlinename[a];
@@ -272,23 +272,32 @@ void qjdWidget::paintRfileRelation(QPainter *painter)
 
 void qjdWidget::decide()
 {
+    bool check=false;
     for(int a=0;a<SNumber;a++)
     {
-        if(mr<estS[a]+50 && mr>estS[a]-50 &&
-           miss<norS[a]+50 && miss>norS[a]-50)
+        if(mr<estS[a]+20 && mr>estS[a]-20 &&
+           miss<norS[a]+30 && miss>norS[a]-30)
         {
+            check=true;
             sON=true;
             rON=false;
         }
     }
     for(int b=0;b<RNumber;b++)
     {
-        if(mr<estR[b]+20 && mr>estR[b]-20
+        if(mr<estR[b]+10 && mr>estR[b]-10
            && miss<norR[b]+20 && miss>norR[b]-20)
         {
+            check=true;
             sON=false;
             rON=true;
         }
+    }
+    qDebug()<<check;
+    if(check==false)
+    {
+        sON=false;
+        rON=false;
     }
 }
 

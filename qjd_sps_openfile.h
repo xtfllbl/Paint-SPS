@@ -4,6 +4,7 @@
 #include <QtGui/QWidget>
 #include <QFile>
 #include "ui_qjd_sps_openfile.h"
+#include <QFileDialog>
 
 namespace Ui {
     class OpenFile;
@@ -16,6 +17,7 @@ public:
     explicit qjdOpenFile(QWidget *parent = 0);
     virtual ~qjdOpenFile();
 
+    QFileDialog *filedialog;
     QString SfileName;
     QString XfileName;
     QString RfileName;

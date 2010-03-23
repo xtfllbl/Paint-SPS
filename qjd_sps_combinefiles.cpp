@@ -51,7 +51,7 @@ void qjdCombineFiles::on_btnOK_clicked()
     {
         combineSuccess=true;
 
-        QMessageBox::information(this,tr("Succes"),tr("Congraduation! The file has been combined in: ")+m_ui->lineCombineFile->text()
+        QMessageBox::information(this,tr("Succes"),tr("The file will be combined in: ")+m_ui->lineCombineFile->text()
                                  +tr("\nIf need more services, please click the Reset button to continue!"));
     }
     else if(fileNumbers==1)
@@ -94,6 +94,13 @@ void qjdCombineFiles::on_btnAdd_clicked()
 }
 
 void qjdCombineFiles::on_btnReset_clicked()
+{
+    fileNames=whiteList;
+    m_ui->lineCombineFile->setText("");
+    model->setStringList(fileNames);
+    m_ui->fileList->setModel(model);
+}
+void qjdCombineFiles::reset()
 {
     fileNames=whiteList;
     m_ui->lineCombineFile->setText("");

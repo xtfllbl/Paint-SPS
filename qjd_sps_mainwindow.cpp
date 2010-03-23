@@ -541,7 +541,7 @@ void qjdMainWindow::mousePressEvent( QMouseEvent *event)
             QPoint point =  my->mapFromGlobal(event->globalPos());
             my->mr=my->minDrawE+(point.x())*my->drawWid/(my->width());
             my->miss=my->minDrawN+ ((my->height())-(point.y()))   *my->drawHei/(my->height());
-            my->decide();
+            my->decide();       // 判断点击的是炮点还是检波点
             my->update();
         }
     }
@@ -568,17 +568,17 @@ void qjdMainWindow::mousePressEvent( QMouseEvent *event)
 
 void qjdMainWindow::mouseDoubleClickEvent(QMouseEvent *)
 {
-    my->HOldIncrease=1;
-    my->VOldIncrease=1;
-    ui->actionReset->setEnabled(false);
-
-    my->resize(scrollarea->width(),scrollarea->height());
-
-    my->mouseRightZoom=false;
-    HScrollBar->setValue(0);
-    VScrollBar->setValue(0);
-
-    my->refreshPixmap();
+//    my->HOldIncrease=1;
+//    my->VOldIncrease=1;
+//    ui->actionReset->setEnabled(false);
+//
+//    my->resize(scrollarea->width(),scrollarea->height());
+//
+//    my->mouseRightZoom=false;
+//    HScrollBar->setValue(0);
+//    VScrollBar->setValue(0);
+//
+//    my->refreshPixmap();
 }
 
 void qjdMainWindow::mouseReleaseEvent ( QMouseEvent *event )
@@ -1171,6 +1171,7 @@ void qjdMainWindow::combineFilesIntoOne()
             f[j].close();
         }
         fAfterCombine.close();
+        combinefiles->reset();
     }
     else if(combinefiles->combineSuccess==false)
         return;
