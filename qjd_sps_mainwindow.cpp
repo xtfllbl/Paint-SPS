@@ -665,7 +665,7 @@ void qjdMainWindow::setData()
     my->norDrawS.resize(my->SNumber);
 
     fsps.seek(firstLineS*(81+plusEnter)+1);
-//    while(!fsps.atEnd())
+    //    while(!fsps.atEnd())
     for(int i=0;i<my->SNumber;i++)
     {
         fsps.readLine(Slinename,17);
@@ -673,7 +673,7 @@ void qjdMainWindow::setData()
         fsps.readLine(Spointnumber,9);
         my->spointnumber[i]=atof(Spointnumber);
 
-//        qDebug()<<Slinename;
+        //        qDebug()<<Slinename;
         fsps.seek(fsps.pos()+21);
         fsps.readLine(EstS,10);
         my->estS[i]=atof(EstS);
@@ -699,13 +699,13 @@ void qjdMainWindow::setData()
         fsps.seek(fsps.pos()+17+plusEnter);
     }
     ////------------------------R文件数据处理---------------------------//
-//    my->RNumber=0;
-//    frps.seek(firstLineR*(81+plusEnter));
-//    while(!frps.atEnd())
-//    {
-//        my->RNumber++;
-//        frps.seek(frps.pos()+81+plusEnter);
-//    }
+    //    my->RNumber=0;
+    //    frps.seek(firstLineR*(81+plusEnter));
+    //    while(!frps.atEnd())
+    //    {
+    //        my->RNumber++;
+    //        frps.seek(frps.pos()+81+plusEnter);
+    //    }
     my->rlinename.resize(my->RNumber);
     my->rpointnumber.resize(my->RNumber);
     my->estR.resize(my->RNumber);
@@ -714,7 +714,7 @@ void qjdMainWindow::setData()
     my->norDrawR.resize(my->RNumber);
 
     frps.seek(firstLineR*(81+plusEnter)+1);
-//    while(!frps.atEnd())
+    //    while(!frps.atEnd())
     for(int j=0;j<my->RNumber;j++)
     {
         frps.readLine(Rlinename,17);
@@ -744,13 +744,13 @@ void qjdMainWindow::setData()
         else if(my->rlinename[j]>my->maxRN)
             my->maxRN=(int)my->rlinename[j];
         //qDebug()<<"max"<<my->maxN<<"min"<<my->minN;
-//        j++;
+        //        j++;
 
         frps.seek(frps.pos()+17+plusEnter);
     }
     my->wid=my->maxE-my->minE;
     my->hei=my->maxN-my->minN;
-//    qDebug()<<my->maxN<<my->minN;
+    //    qDebug()<<my->maxN<<my->minN;
     my->minDrawE=my->minE-my->wid*0.1;
     my->maxDrawE=my->maxE+my->wid*0.1;
     my->minDrawN=my->minN-my->hei*0.1;
@@ -759,15 +759,15 @@ void qjdMainWindow::setData()
     my->drawWid=my->maxDrawE-my->minDrawE;
     my->drawHei=my->maxDrawN-my->minDrawN;
 
-//    qDebug()<<my->drawWid<<my->drawHei;
+    //    qDebug()<<my->drawWid<<my->drawHei;
     ////------------------------X文件数据处理----------------------//
-//    my->XNumber=0;
-//    fxps.seek(firstLineX*(81+plusEnter));
-//    while(!fxps.atEnd())
-//    {
-//        my->XNumber++;
-//        fxps.seek(fxps.pos()+81+plusEnter);
-//    }
+    //    my->XNumber=0;
+    //    fxps.seek(firstLineX*(81+plusEnter));
+    //    while(!fxps.atEnd())
+    //    {
+    //        my->XNumber++;
+    //        fxps.seek(fxps.pos()+81+plusEnter);
+    //    }
     my->xlinename.resize(my->XNumber);
     my->xpointnumber.resize(my->XNumber);
     my->xreceivelinename.resize(my->XNumber);
@@ -775,7 +775,7 @@ void qjdMainWindow::setData()
     my->xtoreceiver.resize(my->XNumber);
 
     fxps.seek(firstLineX*(81+plusEnter)+13);
-//    while(!fxps.atEnd())
+    //    while(!fxps.atEnd())
     for(int k=0;k<my->XNumber;k++)
     {
         fxps.readLine(Xlinename,17);
@@ -795,7 +795,7 @@ void qjdMainWindow::setData()
         fxps.readLine(XToreceiver,9);
         my->xtoreceiver[k]=atof(XToreceiver);
         //qDebug()<<my->xlinename[k]<<my->xpointnumber[k]<<my->xreceivelinename[k]<<my->xfromreceiver[k]<<my->xtoreceiver[k];
-//        k++;
+        //        k++;
 
         fxps.seek(fxps.pos()+15+plusEnter);
     }
@@ -1119,12 +1119,9 @@ void qjdMainWindow::combineFilesIntoOne()
         for(int i=0;i<combinefiles->fileNumbers;i++)
         {
             QString currentName=combinefiles->fileNames.at(i);
-            //qDebug()<<currentName;
             f[i].setFileName(currentName);
-            //qDebug()<<f[i].fileName();
             if (!f[i].open(QIODevice::ReadOnly))
                 f[i].close();
-            //qDebug()<<i;
         }
 
         /*            打开合并后的文件            */
@@ -1134,45 +1131,44 @@ void qjdMainWindow::combineFilesIntoOne()
             fAfterCombine.close();
 
         /*            复制第一个文件            */
-        QByteArray file1Array=f[0].readAll();
-        fAfterCombine.write(file1Array);
-        f[0].close();
-
-        /*            确定后续文件数据位置            */
+        QByteArray fileArray;
         QByteArray str;
-        QByteArray rn;
-        file2IsWindowsEnter=0;
 
-        //判断file2文件回车字符的字节数
-        f[1].seek(80);
-        rn=f[1].read(2);
-        if(rn=="\r\n")
+        f[0].seek(0);
+        while(!f[0].atEnd())
         {
-            //qDebug()<<"isWindowsEnter";
-            file2IsWindowsEnter=1;
-        }
-
-        //找到file2文件的数据起始位置
-        f[1].seek(0);
-        for(file2FinalLine=1;file2FinalLine<200;file2FinalLine++)
-        {
-            str=f[1].read(1);
-            if(str=="S"||str=="X"||str=="R")
+            str=f[0].read(1);
+            if(str=="S" || str=="R" || str=="X" || str=="H")
             {
-                break;
+                fileArray.append(str);
+                fileArray.append(f[0].readLine(100));
             }
-            f[1].seek(f[1].pos()+80+file2IsWindowsEnter);
         }
-        //qDebug()<<file2FinalLine;
+        fAfterCombine.write(fileArray);
+        f[0].close();
+        fileArray.clear();     //不要忘记清空
 
-        /*            复制余下的文件            */
+        /*            复制后续文件数据位置            */
         for(int j=1;j<combinefiles->fileNumbers;j++)
         {
-            f[j].seek((file2FinalLine-1)*(81+file2IsWindowsEnter));
-            QByteArray fileRest=f[j].readAll();
-            fAfterCombine.write(fileRest);
+            //找到数据并复制
+            f[j].seek(0);
+            while(!f[j].atEnd())
+            {
+                str=f[j].read(1);
+                if(str=="H")
+                {
+                    f[j].seek(f[j].pos()+80);
+                }
+                if(str=="S"||str=="X"||str=="R")
+                {
+                    fileArray.append(str);
+                    fileArray.append(f[j].readLine(100));
+                }
+            }
+            fAfterCombine.write(fileArray);
+            fileArray.clear();
             f[j].close();
-
         }
         fAfterCombine.close();
     }

@@ -89,7 +89,6 @@ private:
 
     int file2FinalLine;
     bool isWindowsEnter;
-    bool file2IsWindowsEnter;
     int plusEnter;
 
     qjdWidget *my;
