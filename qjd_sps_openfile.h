@@ -10,9 +10,9 @@ namespace Ui {
     class OpenFile;
 }
 
-class qjdOpenFile : public QWidget {
+class qjdOpenFile : public QWidget
+{
     Q_OBJECT
-    //  Q_DISABLE_COPY(OpenFile)
 public:
     explicit qjdOpenFile(QWidget *parent = 0);
     virtual ~qjdOpenFile();

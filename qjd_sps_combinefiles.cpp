@@ -36,8 +36,8 @@ void qjdCombineFiles::changeEvent(QEvent *e)
 
 void qjdCombineFiles::on_btnCombineFile_clicked()
 {
-    combineFileName = QFileDialog::getSaveFileName(this,tr("Open Combine File"),"/home/student/Source",
-                                                   tr("S Files (*.s *.S *.sps *.SPS);;R Files (*.r *.R *.rps *.RPS);;X Files(*.x *.X *.xps *.XPS)"));
+    combineFileName = QFileDialog::getSaveFileName(this,tr("Open Combine File"),"/home/xtf/Source",
+                                                   tr("SPS Files (*.s *.S *.sps *.SPS *.r *.R *.rps *.RPS*.x *.X *.xps *.XPS"));
     m_ui->lineCombineFile->setText(combineFileName);
 }
 
@@ -81,8 +81,8 @@ void qjdCombineFiles::on_btnDel_clicked()
 
 void qjdCombineFiles::on_btnAdd_clicked()
 {
-    fileTempNames = QFileDialog::getOpenFileNames(this,tr("Open File"),"/home/student/Source",
-                                                  tr("S Files (*.s *.S *.sps *.SPS);;R Files (*.r *.R *.rps *.RPS);;X Files(*.x *.X *.xps *.XPS)"));
+    fileTempNames = QFileDialog::getOpenFileNames(this,tr("Open File"),"/home/xtf",
+                                                  tr("SPS Files (*.s *.S *.sps *.SPS *.r *.R *.rps *.RPS*.x *.X *.xps *.XPS"));
     fileNames=fileNames+fileTempNames;
     fileNames.removeDuplicates();       //去除相同字符窜
     model->setStringList(fileNames);

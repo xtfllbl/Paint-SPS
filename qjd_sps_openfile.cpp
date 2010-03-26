@@ -37,8 +37,9 @@ void qjdOpenFile::changeEvent(QEvent *e)
 }
 
 void qjdOpenFile::btnSPress()
-{
-    SfileName = filedialog->getOpenFileName(this,tr("Open S File"),"/home/student/Source/SPS",tr("SPS S Files (*.s *.S *.sps *.SPS)"));
+{    
+    SfileName = filedialog->getOpenFileName(this,tr("Open S File"),"/home/xtf/Source",tr("SPS S Files (*.s *.S *.sps *.SPS)"));
+
     m_ui->lineSFile->setText(SfileName);
 
     QString str1 = SfileName;
@@ -75,7 +76,7 @@ void qjdOpenFile::btnSPress()
 
 void qjdOpenFile::btnRPress()
 {
-    RfileName = QFileDialog::getOpenFileName(this,tr("Open R File"),"/home/student/Source",tr("SPS R Files (*.r *.R *.rps *.RPS)"));
+    RfileName = QFileDialog::getOpenFileName(this,tr("Open R File"),"/home/xtf/Source",tr("SPS R Files (*.r *.R *.rps *.RPS)"));
     m_ui->lineRFile->setText(RfileName);
 
     QString str2 = RfileName;
@@ -111,7 +112,7 @@ void qjdOpenFile::btnRPress()
 
 void qjdOpenFile::btnXPress()
 {
-    XfileName = QFileDialog::getOpenFileName(this,tr("Open X File"),"/home/student/Source",tr("SPS S Files (*.x *.X *.xps *.XPS)"));
+    XfileName = QFileDialog::getOpenFileName(this,tr("Open X File"),"/home/xtf/Source",tr("SPS S Files (*.x *.X *.xps *.XPS)"));
     m_ui->lineXFile->setText(XfileName);
 
     QString str3 = XfileName;

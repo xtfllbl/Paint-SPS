@@ -828,7 +828,7 @@ void qjdMainWindow::paintEvent(QPaintEvent *)
     HBarMax=HScrollBar->maximum();
     VBarMax=VScrollBar->maximum();
 
-    QPainter painter(this);
+    QPainter painter(this);       //引起错误
     paintCor(&painter);
 }
 
@@ -1071,7 +1071,7 @@ void qjdMainWindow::paintCor(QPainter *painter)
         painter->drawLine(point.x()+300-SLSize,85-SLSize,point.x()+300-SLSize,85+SLSize);
     }
 
-    update();
+//    update();     //这句加了遗憾半年，还以为是qt bug
 }
 
 void qjdMainWindow::on_actionRelation_triggered()
