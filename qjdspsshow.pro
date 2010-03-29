@@ -1,9 +1,8 @@
-# -------------------------------------------------
-# Project created by QtCreator 2009-05-13T11:19:12
-# -------------------------------------------------
 TARGET = SPSShow
 TEMPLATE = app
 CONFIG += qt debug
+QMAKE_LFAGS+= -static
+
 DEPENDPATH += . debug
 INCLUDEPATH += .
 SOURCES += main.cpp \
