@@ -42,7 +42,7 @@
      <x>0</x>
      <y>0</y>
      <width>840</width>
-     <height>25</height>
+     <height>28</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -115,8 +115,8 @@
   <widget class="QStatusBar" name="statusBar"/>
   <action name="actionOpen">
    <property name="icon">
-    <iconset>
-     <normaloff>:/new/prefix1/image/Nuvola_filesystems_folder_yellow_open.png</normaloff>:/new/prefix1/image/Nuvola_filesystems_folder_yellow_open.png</iconset>
+    <iconset resource="image.qrc">
+     <normaloff>:/new/prefix1/image/6.png</normaloff>:/new/prefix1/image/6.png</iconset>
    </property>
    <property name="text">
     <string>Open</string>
@@ -133,8 +133,8 @@
   </action>
   <action name="actionReset">
    <property name="icon">
-    <iconset>
-     <normaloff>:/new/prefix1/image/Crystal_Clear_action_reload.png</normaloff>:/new/prefix1/image/Crystal_Clear_action_reload.png</iconset>
+    <iconset resource="image.qrc">
+     <normaloff>:/new/prefix1/image/7.png</normaloff>:/new/prefix1/image/7.png</iconset>
    </property>
    <property name="text">
     <string>Reset</string>
@@ -151,7 +151,7 @@
     <bool>true</bool>
    </property>
    <property name="icon">
-    <iconset>
+    <iconset resource="image.qrc">
      <normaloff>:/new/prefix1/image/sr.png</normaloff>:/new/prefix1/image/sr.png</iconset>
    </property>
    <property name="text">
@@ -167,7 +167,7 @@
   </action>
   <action name="actionCombineFiles">
    <property name="icon">
-    <iconset>
+    <iconset resource="image.qrc">
      <normaloff>:/new/prefix1/image/32px-Crystal_Clear_app_database.png</normaloff>:/new/prefix1/image/32px-Crystal_Clear_app_database.png</iconset>
    </property>
    <property name="text">
@@ -182,8 +182,8 @@
   </action>
   <action name="actionClose">
    <property name="icon">
-    <iconset>
-     <normaloff>:/new/prefix1/image/Crystal_Clear_action_exit.png</normaloff>:/new/prefix1/image/Crystal_Clear_action_exit.png</iconset>
+    <iconset resource="image.qrc">
+     <normaloff>:/new/prefix1/image/8.png</normaloff>:/new/prefix1/image/8.png</iconset>
    </property>
    <property name="text">
     <string>Close</string>
@@ -194,7 +194,7 @@
   </action>
   <action name="actionAbout_QT">
    <property name="icon">
-    <iconset>
+    <iconset resource="image.qrc">
      <normaloff>:/new/prefix1/image/Torchlight_qt.png</normaloff>:/new/prefix1/image/Torchlight_qt.png</iconset>
    </property>
    <property name="text">
@@ -206,7 +206,7 @@
     <bool>true</bool>
    </property>
    <property name="icon">
-    <iconset>
+    <iconset resource="image.qrc">
      <normaloff>:/new/prefix1/image/32px-Crystal_Clear_mimetype_source_r.png</normaloff>:/new/prefix1/image/32px-Crystal_Clear_mimetype_source_r.png</iconset>
    </property>
    <property name="text">
@@ -221,7 +221,7 @@
     <bool>true</bool>
    </property>
    <property name="icon">
-    <iconset>
+    <iconset resource="image.qrc">
      <normaloff>:/new/prefix1/image/receiveline.png</normaloff>:/new/prefix1/image/receiveline.png</iconset>
    </property>
    <property name="text">
@@ -275,7 +275,7 @@
     <bool>true</bool>
    </property>
    <property name="icon">
-    <iconset>
+    <iconset resource="image.qrc">
      <normaloff>:/new/prefix1/image/s.png</normaloff>:/new/prefix1/image/s.png</iconset>
    </property>
    <property name="text">
@@ -290,7 +290,7 @@
     <bool>true</bool>
    </property>
    <property name="icon">
-    <iconset>
+    <iconset resource="image.qrc">
      <normaloff>:/new/prefix1/image/r.png</normaloff>:/new/prefix1/image/r.png</iconset>
    </property>
    <property name="text">
@@ -299,8 +299,8 @@
   </action>
   <action name="actionOption">
    <property name="icon">
-    <iconset>
-     <normaloff>:/new/prefix1/image/gnome-stock-gnome-run.png</normaloff>:/new/prefix1/image/gnome-stock-gnome-run.png</iconset>
+    <iconset resource="image.qrc">
+     <normaloff>:/new/prefix1/image/1.png</normaloff>:/new/prefix1/image/1.png</iconset>
    </property>
    <property name="text">
     <string>option</string>
@@ -308,8 +308,8 @@
   </action>
   <action name="actionHelp">
    <property name="icon">
-    <iconset>
-     <normaloff>:/new/prefix1/image/Torchlight_help.png</normaloff>:/new/prefix1/image/Torchlight_help.png</iconset>
+    <iconset resource="image.qrc">
+     <normaloff>:/new/prefix1/image/10.png</normaloff>:/new/prefix1/image/10.png</iconset>
    </property>
    <property name="text">
     <string>Help</string>
@@ -317,6 +317,8 @@
   </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources/>
+ <resources>
+  <include location="image.qrc"/>
+ </resources>
  <connections/>
 </ui>

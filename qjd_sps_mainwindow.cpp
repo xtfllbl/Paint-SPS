@@ -10,6 +10,7 @@
 
 qjdMainWindow::qjdMainWindow(QWidget *parent): QMainWindow(parent), ui(new Ui::MainWindow)
 {
+    COUNT=0;
     my = new qjdWidget();
     openS=false;
     my->rectWidth=0;
@@ -59,13 +60,24 @@ qjdMainWindow::qjdMainWindow(QWidget *parent): QMainWindow(parent), ui(new Ui::M
     statusLabel5=new QLabel();
 
     pBar=new QProgressBar();
-    pBar->hide();
+//    pBar->hide();
 
-    statusLabel1->setFixedWidth(200);
-    statusLabel2->setFixedWidth(130);
-    statusLabel3->setFixedWidth(50);
-    statusLabel5->setFixedWidth(50);
+    perWidget = new QLabel();
+    perWidget->setPixmap(QPixmap(":/progress/pg/00.png"));
+//    perWidget->setAutoFillBackground(true);
 
+//    statusLabel1->setFixedWidth(200);
+//    statusLabel2->setFixedWidth(130);
+//    statusLabel3->setFixedWidth(50);
+//    statusLabel5->setFixedWidth(50);
+    statusLabel1->setMinimumWidth(200);
+    statusLabel2->setMinimumWidth(130);
+    statusLabel3->setMinimumWidth(50);
+    statusLabel5->setMinimumWidth(50);
+    perWidget->setMinimumSize(40,40);
+    pBar->setMaximumSize(1,1);      //必须显示，否则动画不更新
+
+    statusBar()->addWidget(perWidget);
     statusBar()->addWidget(statusLabel1);
     statusBar()->addWidget(statusLabel2);
     statusBar()->addWidget(statusLabel3);
@@ -109,6 +121,7 @@ qjdMainWindow::qjdMainWindow(QWidget *parent): QMainWindow(parent), ui(new Ui::M
     connect(combinefiles->m_ui->btnOK,SIGNAL(clicked()),this,SLOT(combineFilesIntoOne()));
     connect(option->m_ui->btnApply,SIGNAL(clicked()),this,SLOT(applyChange()));
 
+    /// 设置进度
     connect(my,SIGNAL(signalMaxSet(int)),this,SLOT(setProgressBar(int)));
     connect(my,SIGNAL(signalValueSet(int)),this,SLOT(setProgressBarValue(int)));
     connect(my,SIGNAL(signalHideBar()),this,SLOT(hideBar()));
@@ -154,12 +167,13 @@ qjdMainWindow::qjdMainWindow(QWidget *parent): QMainWindow(parent), ui(new Ui::M
     RLSize=2;
     CMPSize=2;
 
-    /// 设置CMP精度
-    connect(option,SIGNAL(signalCMPAccuracy(int)),my,SLOT(setCMPAccuracy(int)));
     int width=QApplication::desktop()->width();         //获取屏幕的分辨率
     int height=QApplication::desktop()->height();
     this->move((width/2)-250,(height/2)-300);
 
+     paintTimer=new QTimer(this);
+     connect(paintTimer,SIGNAL(timeout()),this,SLOT(update()));
+     paintTimer->start(500);
 }
 
 qjdMainWindow::~qjdMainWindow()
@@ -186,6 +200,9 @@ void qjdMainWindow::frontOpen()
         my->rpointnumber.clear();
         my->estR.clear();
         my->norR.clear();
+
+        my->boxXY.clear();      /// ~~~~~~~~~~~~~~~~~~~~~~
+        my->boxXYTT.clear();
 
         openfile->SfileName = openfile->m_ui->lineSFile->text();
         openfile->RfileName = openfile->m_ui->lineRFile->text();
@@ -235,6 +252,7 @@ void qjdMainWindow::frontOpen()
 
         my->alreadySetFoldDataZheng=false;
         my->alreadySetFoldDataXie=false;
+        my->foldIsChanged=true;     //补写，非常重要
         my->alreadySetShotData=false;
         my->alreadySetCMP=false;
 
@@ -258,7 +276,7 @@ void qjdMainWindow::frontOpen()
                 my->singleHeiView=openfile->m_ui->lineSingleHei->text();
                 my->singleWid=my->singleWidView.toInt();
                 my->singleHei=my->singleHeiView.toInt();
-                my->setFoldNumbers();
+                my->setFoldNumbersZheng();
             }
             if(my->flagXie==true)
             {
@@ -267,8 +285,10 @@ void qjdMainWindow::frontOpen()
                 my->singleWidT=my->singleWidTView.toInt();
                 my->singleHeiT=my->singleHeiTView.toInt();
                 my->axisTransform();
-                my->setFoldTransform();
+                my->setFoldXie();
             }
+            my->resize(scrollarea->width(),scrollarea->height());
+
         }
         else
         {
@@ -288,18 +308,30 @@ void qjdMainWindow::frontOpen()
             my->alreadySetCMP=true;
             if(my->flagZheng==true)
             {
-                my->setFoldNumbers();
+                my->setFoldNumbersZheng();
                 my->alreadySetFoldDataZheng=true;
             }
             if(my->flagXie==true)
             {
                 my->axisTransform();
-                my->setFoldTransform();
+                my->setFoldXie();
                 my->alreadySetFoldDataXie=true;
             }
             my->foldIsChanged=true;
             my->cmpIsChanged=true;
         }
+
+        if(my->flagZheng==true)
+        {
+            option->m_ui->spinSingleWid->setValue((int)my->singleWid);
+            option->m_ui->spinSingleHei->setValue((int)my->singleHei);
+        }
+        if(my->flagXie==true)
+        {
+            option->m_ui->spinSingleWid->setValue((int)my->singleWidT);
+            option->m_ui->spinSingleHei->setValue((int)my->singleHeiT);
+        }
+
         /// 显示
         my->refreshPixmap();
     }
@@ -311,6 +343,7 @@ void qjdMainWindow::frontOpen()
 
 void qjdMainWindow::on_actionOpen_triggered()
 {
+//    option->hide();       //不hide也没啥问题
     openfile->show();
     int width=QApplication::desktop()->width();         //获取屏幕的分辨率
     int height=QApplication::desktop()->height();
@@ -823,13 +856,15 @@ void qjdMainWindow::on_actionReset_triggered()
 
 void qjdMainWindow::paintEvent(QPaintEvent *)
 {
+//    COUNT++;
     HBarValue=HScrollBar->value();
     VBarValue=VScrollBar->value();
     HBarMax=HScrollBar->maximum();
     VBarMax=VScrollBar->maximum();
 
     QPainter painter(this);       //引起错误
-    paintCor(&painter);
+//    qDebug()<<"paintCor"<<COUNT;
+    paintCor(&painter);     //不是一直更新？
 }
 
 void qjdMainWindow::paintCor(QPainter *painter)
@@ -905,6 +940,7 @@ void qjdMainWindow::paintCor(QPainter *painter)
     painter->setLayoutDirection(Qt::LeftToRight);
     if(openS==true)
     {
+//        qDebug()<<"Write zuo biao";
         for(int x=0;x<=(scrollarea->width()/100);x++)        //set Axis X text
         {
             qreal Hplus;
@@ -1070,8 +1106,9 @@ void qjdMainWindow::paintCor(QPainter *painter)
         painter->drawLine(point.x()+300-SLSize,85-SLSize,point.x()+300+SLSize,85-SLSize);
         painter->drawLine(point.x()+300-SLSize,85-SLSize,point.x()+300-SLSize,85+SLSize);
     }
-
-//    update();     //这句加了遗憾半年，还以为是qt bug
+    /// 暂时依靠定时器更新
+//    repaint();
+//    update();     //这句加了遗憾半年，不加，也有遗憾，坐标轴不动了
 }
 
 void qjdMainWindow::on_actionRelation_triggered()
@@ -1096,7 +1133,8 @@ void qjdMainWindow::on_actionRelation_triggered()
 
 void qjdMainWindow::resizeEvent (QResizeEvent * )
 {
-
+    //    QPainter painter(this);       //引起错误
+    //    paintCor(&painter);     //不是一直更新？
     //    my->alreadySetShotData;
     if(my->mouseRightZoom==false)
     {
@@ -1231,7 +1269,7 @@ void qjdMainWindow::on_actionFoldNumbers_triggered()
         if(ui->actionFoldNumbers->isChecked() && my->alreadySetFoldDataZheng==false)
         {
             qDebug()<<"false";
-            my->setFoldNumbers();
+            my->setFoldNumbersZheng();
             //            my->foldIsChanged=true;
             my->foldModeON=true;
             my->alreadySetFoldDataZheng=true;
@@ -1253,14 +1291,16 @@ void qjdMainWindow::on_actionFoldNumbers_triggered()
 
         if(ui->actionFoldNumbers->isChecked() && my->alreadySetFoldDataXie==false)
         {
+            qDebug()<<"1";
             my->foldModeON=true;
             my->alreadySetFoldDataXie=true;
 
             my->axisTransform();
-            my->setFoldTransform();
+            my->setFoldXie();
         }
         else if(ui->actionFoldNumbers->isChecked() && my->alreadySetFoldDataXie==true)
         {
+            qDebug()<<"2";
             my->foldModeON=true;
         }
         else
@@ -1364,7 +1404,7 @@ void qjdMainWindow::applyChange()
         {
             my->singleWid=a;
             my->singleHei=b;
-            my->setFoldNumbers();
+            my->setFoldNumbersZheng();
             my->foldIsChanged=true;
         }
     }
@@ -1377,7 +1417,7 @@ void qjdMainWindow::applyChange()
             my->singleWidT=a;
             my->singleHeiT=b;
             my->axisTransform();
-            my->setFoldTransform();
+            my->setFoldXie();
             my->foldIsChanged=true;
         }
     }
@@ -1481,19 +1521,112 @@ void qjdMainWindow::on_actionHelp_triggered()
 
 void qjdMainWindow::setProgressBar(int max)
 {
-    pBar->show();
+//    pBar->show();
     pBar->setMaximum(max);
     pBar->setValue(0);
+
+    qDebug()<<"show";
+//    perWidget->show();
+    perWidget->setPixmap(QPixmap(":/progress/pg/00.png"));
+    perWidgetMax=max;
 }
 
 void qjdMainWindow::setProgressBarValue(int value)
 {
     pBar->setValue(value);
+
+    int a=100*value/perWidgetMax;
+    if(value==perWidgetMax)
+    {
+        perWidget->setPixmap(QPixmap(":/progress/pg/100.png"));
+    }
+    if(a>=0 && a<5)
+    {
+        perWidget->setPixmap(QPixmap(":/progress/pg/00.png"));
+    }
+    if(a>=5 && a<10)
+    {
+        perWidget->setPixmap(QPixmap(":/progress/pg/05.png"));
+    }
+    if(a>=10 && a<15)
+    {
+        perWidget->setPixmap(QPixmap(":/progress/pg/10.png"));
+    }
+    if(a>=15 && a<20)
+    {
+        perWidget->setPixmap(QPixmap(":/progress/pg/15.png"));
+    }
+    if(a>=20 && a<25)
+    {
+        perWidget->setPixmap(QPixmap(":/progress/pg/20.png"));
+    }
+    if(a>=25 && a<30)
+    {
+        perWidget->setPixmap(QPixmap(":/progress/pg/25.png"));
+    }
+    if(a>=30 && a<35)
+    {
+        perWidget->setPixmap(QPixmap(":/progress/pg/30.png"));
+    }
+    if(a>=35 && a<40)
+    {
+        perWidget->setPixmap(QPixmap(":/progress/pg/35.png"));
+    }
+    if(a>=40 && a<45)
+    {
+        perWidget->setPixmap(QPixmap(":/progress/pg/40.png"));
+    }
+    if(a>=45 && a<50)
+    {
+        perWidget->setPixmap(QPixmap(":/progress/pg/45.png"));
+    }
+    if(a>=50 && a<55)
+    {
+        perWidget->setPixmap(QPixmap(":/progress/pg/50.png"));
+    }
+    if(a>=55 && a<60)
+    {
+        perWidget->setPixmap(QPixmap(":/progress/pg/55.png"));
+    }
+    if(a>=60 && a<65)
+    {
+        perWidget->setPixmap(QPixmap(":/progress/pg/60.png"));
+    }
+    if(a>=65 && a<70)
+    {
+        perWidget->setPixmap(QPixmap(":/progress/pg/65.png"));
+    }
+    if(a>=70 && a<75)
+    {
+        perWidget->setPixmap(QPixmap(":/progress/pg/70.png"));
+    }
+    if(a>=75 && a<80)
+    {
+        perWidget->setPixmap(QPixmap(":/progress/pg/75.png"));
+    }
+    if(a>=80 && a<85)
+    {
+        perWidget->setPixmap(QPixmap(":/progress/pg/80.png"));
+    }
+    if(a>=85 && a<90)
+    {
+        perWidget->setPixmap(QPixmap(":/progress/pg/85.png"));
+    }
+    if(a>=90 && a<95)
+    {
+        perWidget->setPixmap(QPixmap(":/progress/pg/90.png"));
+    }
+    if(a>=95 && a<100)
+    {
+        perWidget->setPixmap(QPixmap(":/progress/pg/95.png"));
+    }
+    update();
 }
 
 void qjdMainWindow::hideBar()
 {
-    pBar->hide();
+//    qDebug()<<"hide";
+//    perWidget->hide();
 }
 
 

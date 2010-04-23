@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>409</width>
-    <height>268</height>
+    <width>412</width>
+    <height>274</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -166,7 +166,7 @@
    <item row="3" column="0">
     <widget class="QGroupBox" name="groupUnit">
      <property name="title">
-      <string>Unit:</string>
+      <string>Unit width:</string>
      </property>
      <layout class="QGridLayout" name="gridLayout_2">
       <item row="0" column="0">
@@ -179,12 +179,16 @@
            </font>
           </property>
           <property name="text">
-           <string>Unit width:</string>
+           <string>EastWest width:</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="lineSingleWid"/>
+         <widget class="QLineEdit" name="lineSingleWid">
+          <property name="text">
+           <string>50</string>
+          </property>
+         </widget>
         </item>
         <item>
          <widget class="QLabel" name="label_5">
@@ -194,12 +198,16 @@
            </font>
           </property>
           <property name="text">
-           <string>Unit height:</string>
+           <string>SourthNorth width:</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="lineSingleHei"/>
+         <widget class="QLineEdit" name="lineSingleHei">
+          <property name="text">
+           <string>25</string>
+          </property>
+         </widget>
         </item>
        </layout>
       </item>
@@ -208,16 +216,6 @@
    </item>
    <item row="4" column="0">
     <layout class="QHBoxLayout" name="horizontalLayout_4">
-     <item>
-      <widget class="QPushButton" name="pushButton_2">
-       <property name="text">
-        <string>More</string>
-       </property>
-       <property name="checkable">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
      <item>
       <spacer name="horizontalSpacer">
        <property name="orientation">
@@ -250,7 +248,7 @@
        </property>
        <property name="icon">
         <iconset resource="image.qrc">
-         <normaloff>:/new/prefix1/image/Crystal_Clear_action_apply.png</normaloff>:/new/prefix1/image/Crystal_Clear_action_apply.png</iconset>
+         <normaloff>:/new/prefix1/image/3.png</normaloff>:/new/prefix1/image/3.png</iconset>
        </property>
        <property name="shortcut">
         <string>Return</string>
@@ -276,7 +274,7 @@
        </property>
        <property name="icon">
         <iconset resource="image.qrc">
-         <normaloff>:/new/prefix1/image/Crystal_Clear_action_button_cancel.png</normaloff>:/new/prefix1/image/Crystal_Clear_action_button_cancel.png</iconset>
+         <normaloff>:/new/prefix1/image/8.png</normaloff>:/new/prefix1/image/8.png</iconset>
        </property>
        <property name="shortcut">
         <string>Esc</string>
@@ -300,22 +298,5 @@
  <resources>
   <include location="image.qrc"/>
  </resources>
- <connections>
-  <connection>
-   <sender>pushButton_2</sender>
-   <signal>clicked(bool)</signal>
-   <receiver>groupUnit</receiver>
-   <slot>setVisible(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>51</x>
-     <y>233</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>86</x>
-     <y>213</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
 </ui>

@@ -78,11 +78,8 @@ signals:
     void signalReceiveLineShape(int,int);
     void signalMouseClickedShape(int,int);
     void signalCMPShape(int,int);
-    //改变cmp 的精度
-    void signalCMPAccuracy(int);
 
 private slots:
-    void on_comboCMPAccuracy_currentIndexChanged(int index);
     void on_spinCMP_valueChanged(QString );
     void on_btnCMPSC_clicked();
     void on_spinReceiveLineCon_valueChanged(QString );

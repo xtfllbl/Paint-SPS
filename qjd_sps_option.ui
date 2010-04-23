@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>575</width>
-    <height>515</height>
+    <height>523</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,7 +17,7 @@
    <item row="0" column="0">
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>1</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="tabFold">
       <attribute name="title">
@@ -62,6 +62,9 @@
                 <height>0</height>
                </size>
               </property>
+              <property name="minimum">
+               <number>5</number>
+              </property>
               <property name="maximum">
                <number>100000</number>
               </property>
@@ -98,6 +101,9 @@
             </item>
             <item>
              <widget class="QSpinBox" name="spinSingleHei">
+              <property name="minimum">
+               <number>5</number>
+              </property>
               <property name="maximum">
                <number>10000</number>
               </property>
@@ -477,47 +483,31 @@
          </layout>
         </widget>
        </item>
-       <item row="1" column="0">
-        <widget class="QGroupBox" name="groupBox_2">
-         <property name="title">
-          <string>CMP Setting:</string>
+       <item row="3" column="0">
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
          </property>
-         <layout class="QGridLayout" name="gridLayout_6">
-          <item row="0" column="0">
-           <layout class="QHBoxLayout" name="horizontalLayout_13">
-            <item>
-             <widget class="QLabel" name="label_23">
-              <property name="minimumSize">
-               <size>
-                <width>220</width>
-                <height>0</height>
-               </size>
-              </property>
-              <property name="text">
-               <string>Decrease CMP Display Accuracy to:</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QComboBox" name="comboCMPAccuracy"/>
-            </item>
-            <item>
-             <spacer name="horizontalSpacer_4">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>40</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-           </layout>
-          </item>
-         </layout>
-        </widget>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="1" column="0">
+        <spacer name="verticalSpacer_2">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
        </item>
       </layout>
      </widget>
@@ -538,7 +528,7 @@
              <widget class="QLabel" name="label_13">
               <property name="minimumSize">
                <size>
-                <width>150</width>
+                <width>200</width>
                 <height>0</height>
                </size>
               </property>
@@ -571,7 +561,7 @@
              <widget class="QLabel" name="label_14">
               <property name="maximumSize">
                <size>
-                <width>102</width>
+                <width>160</width>
                 <height>30</height>
                </size>
               </property>
@@ -590,38 +580,6 @@
               </property>
               <property name="text">
                <string>Choose Color</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="label_15">
-              <property name="minimumSize">
-               <size>
-                <width>100</width>
-                <height>0</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>16777215</width>
-                <height>30</height>
-               </size>
-              </property>
-              <property name="font">
-               <font>
-                <pointsize>12</pointsize>
-                <weight>75</weight>
-                <bold>true</bold>
-               </font>
-              </property>
-              <property name="frameShape">
-               <enum>QFrame::WinPanel</enum>
-              </property>
-              <property name="frameShadow">
-               <enum>QFrame::Raised</enum>
-              </property>
-              <property name="text">
-               <string>Color</string>
               </property>
              </widget>
             </item>
@@ -659,7 +617,7 @@
              <widget class="QLabel" name="label_4">
               <property name="minimumSize">
                <size>
-                <width>150</width>
+                <width>200</width>
                 <height>0</height>
                </size>
               </property>
@@ -670,28 +628,6 @@
             </item>
             <item>
              <widget class="QPushButton" name="btnShotLineSC">
-              <property name="text">
-               <string>Select Color</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="labelSL">
-              <property name="minimumSize">
-               <size>
-                <width>100</width>
-                <height>0</height>
-               </size>
-              </property>
-              <property name="autoFillBackground">
-               <bool>true</bool>
-              </property>
-              <property name="frameShape">
-               <enum>QFrame::Panel</enum>
-              </property>
-              <property name="frameShadow">
-               <enum>QFrame::Sunken</enum>
-              </property>
               <property name="text">
                <string/>
               </property>
@@ -718,7 +654,7 @@
              <widget class="QLabel" name="label_5">
               <property name="minimumSize">
                <size>
-                <width>150</width>
+                <width>200</width>
                 <height>0</height>
                </size>
               </property>
@@ -729,28 +665,6 @@
             </item>
             <item>
              <widget class="QPushButton" name="btnReceiverLineSC">
-              <property name="text">
-               <string>Select Color</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="labelRL">
-              <property name="minimumSize">
-               <size>
-                <width>100</width>
-                <height>0</height>
-               </size>
-              </property>
-              <property name="autoFillBackground">
-               <bool>true</bool>
-              </property>
-              <property name="frameShape">
-               <enum>QFrame::Panel</enum>
-              </property>
-              <property name="frameShadow">
-               <enum>QFrame::Sunken</enum>
-              </property>
               <property name="text">
                <string/>
               </property>
@@ -777,7 +691,7 @@
              <widget class="QLabel" name="label_6">
               <property name="minimumSize">
                <size>
-                <width>150</width>
+                <width>200</width>
                 <height>0</height>
                </size>
               </property>
@@ -788,28 +702,6 @@
             </item>
             <item>
              <widget class="QPushButton" name="btnMouseClickedSC">
-              <property name="text">
-               <string>Select Color</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="labelMC">
-              <property name="minimumSize">
-               <size>
-                <width>100</width>
-                <height>0</height>
-               </size>
-              </property>
-              <property name="autoFillBackground">
-               <bool>true</bool>
-              </property>
-              <property name="frameShape">
-               <enum>QFrame::Panel</enum>
-              </property>
-              <property name="frameShadow">
-               <enum>QFrame::Sunken</enum>
-              </property>
               <property name="text">
                <string/>
               </property>
@@ -836,7 +728,7 @@
              <widget class="QLabel" name="label_7">
               <property name="minimumSize">
                <size>
-                <width>150</width>
+                <width>200</width>
                 <height>0</height>
                </size>
               </property>
@@ -847,28 +739,6 @@
             </item>
             <item>
              <widget class="QPushButton" name="btnMouseRelationSCSL">
-              <property name="text">
-               <string>Select Color</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="labelMCRSL">
-              <property name="minimumSize">
-               <size>
-                <width>100</width>
-                <height>0</height>
-               </size>
-              </property>
-              <property name="autoFillBackground">
-               <bool>true</bool>
-              </property>
-              <property name="frameShape">
-               <enum>QFrame::Panel</enum>
-              </property>
-              <property name="frameShadow">
-               <enum>QFrame::Sunken</enum>
-              </property>
               <property name="text">
                <string/>
               </property>
@@ -895,7 +765,7 @@
              <widget class="QLabel" name="label_10">
               <property name="minimumSize">
                <size>
-                <width>150</width>
+                <width>200</width>
                 <height>0</height>
                </size>
               </property>
@@ -906,28 +776,6 @@
             </item>
             <item>
              <widget class="QPushButton" name="btnMouseRelationSCRL">
-              <property name="text">
-               <string>Select Color</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="labelMCRRL">
-              <property name="minimumSize">
-               <size>
-                <width>100</width>
-                <height>0</height>
-               </size>
-              </property>
-              <property name="autoFillBackground">
-               <bool>true</bool>
-              </property>
-              <property name="frameShape">
-               <enum>QFrame::Panel</enum>
-              </property>
-              <property name="frameShadow">
-               <enum>QFrame::Sunken</enum>
-              </property>
               <property name="text">
                <string/>
               </property>
@@ -954,7 +802,7 @@
              <widget class="QLabel" name="label_8">
               <property name="minimumSize">
                <size>
-                <width>150</width>
+                <width>200</width>
                 <height>0</height>
                </size>
               </property>
@@ -965,28 +813,6 @@
             </item>
             <item>
              <widget class="QPushButton" name="btnShotLineConSC">
-              <property name="text">
-               <string>Select Color</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="labelSLC">
-              <property name="minimumSize">
-               <size>
-                <width>100</width>
-                <height>0</height>
-               </size>
-              </property>
-              <property name="autoFillBackground">
-               <bool>true</bool>
-              </property>
-              <property name="frameShape">
-               <enum>QFrame::Panel</enum>
-              </property>
-              <property name="frameShadow">
-               <enum>QFrame::Sunken</enum>
-              </property>
               <property name="text">
                <string/>
               </property>
@@ -1013,8 +839,14 @@
              <widget class="QLabel" name="label_9">
               <property name="minimumSize">
                <size>
-                <width>150</width>
+                <width>200</width>
                 <height>0</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>150</width>
+                <height>16777215</height>
                </size>
               </property>
               <property name="text">
@@ -1024,28 +856,6 @@
             </item>
             <item>
              <widget class="QPushButton" name="btnReceiveLineConSC">
-              <property name="text">
-               <string>Select Color</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="labelRLC">
-              <property name="minimumSize">
-               <size>
-                <width>100</width>
-                <height>0</height>
-               </size>
-              </property>
-              <property name="autoFillBackground">
-               <bool>true</bool>
-              </property>
-              <property name="frameShape">
-               <enum>QFrame::Panel</enum>
-              </property>
-              <property name="frameShadow">
-               <enum>QFrame::Sunken</enum>
-              </property>
               <property name="text">
                <string/>
               </property>
@@ -1072,7 +882,7 @@
              <widget class="QLabel" name="label_12">
               <property name="minimumSize">
                <size>
-                <width>150</width>
+                <width>200</width>
                 <height>0</height>
                </size>
               </property>
@@ -1083,28 +893,6 @@
             </item>
             <item>
              <widget class="QPushButton" name="btnCMPSC">
-              <property name="text">
-               <string>Select Color</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="labelCMP">
-              <property name="minimumSize">
-               <size>
-                <width>100</width>
-                <height>0</height>
-               </size>
-              </property>
-              <property name="autoFillBackground">
-               <bool>true</bool>
-              </property>
-              <property name="frameShape">
-               <enum>QFrame::Panel</enum>
-              </property>
-              <property name="frameShadow">
-               <enum>QFrame::Sunken</enum>
-              </property>
               <property name="text">
                <string/>
               </property>
@@ -1154,7 +942,7 @@
        </property>
        <property name="icon">
         <iconset resource="image.qrc">
-         <normaloff>:/new/prefix1/image/Crystal_Clear_action_reload.png</normaloff>:/new/prefix1/image/Crystal_Clear_action_reload.png</iconset>
+         <normaloff>:/new/prefix1/image/7.png</normaloff>:/new/prefix1/image/7.png</iconset>
        </property>
       </widget>
      </item>
@@ -1165,7 +953,7 @@
        </property>
        <property name="icon">
         <iconset resource="image.qrc">
-         <normaloff>:/new/prefix1/image/Crystal_Clear_action_button_cancel.png</normaloff>:/new/prefix1/image/Crystal_Clear_action_button_cancel.png</iconset>
+         <normaloff>:/new/prefix1/image/8.png</normaloff>:/new/prefix1/image/8.png</iconset>
        </property>
       </widget>
      </item>

@@ -202,12 +202,12 @@ public slots:
     void decide();
     void updateRubberBandRegion();
     void paintFoldNumbers(QPainter *painter);
-    void setFoldNumbers();
-    void setFoldTransform();
+    void setFoldNumbersZheng();
+    void setFoldXie();
     void setK();
     void axisTransform();
     void setShotPointLine();
-    void setInterpolationTransform();
+    void setInterpolationXie();
     void setAxisTransform();
     void setCMP();
     void setColorTable();
@@ -228,8 +228,6 @@ public slots:
     void setMouseClickedShape(int,int);
     void setCMPShape(int,int);
 
-    //设置CMP精度
-    void setCMPAccuracy(int);
 private:
 
     QPixmap pixmap;
@@ -327,7 +325,6 @@ private:
     int mouseClickedSize;
     int CMP_Size;
 
-    int skipNum;
 signals:
     void signalMaxSet(int max);
     void signalValueSet(int value);
@@ -338,7 +335,7 @@ protected:
 
 private slots:
     void resizeEvent ( QResizeEvent * );
-    void paintMrRight(QPainter *painter);
+    void paintPlus(QPainter *painter);
     void paintSfileRelation(QPainter *painter);
     void paintRfileRelation(QPainter *painter);
     void paintShotLine(QPainter *painter);
@@ -346,7 +343,7 @@ private slots:
     void paintCMP(QPainter *painter);
     void paintShotPointLine(QPainter *painter);
     void paintReceivePointLine(QPainter *painter);
-    void setInterpolation();
+    void setInterpolationZheng();
 
 };
 

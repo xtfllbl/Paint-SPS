@@ -65,14 +65,14 @@ qjdOption::qjdOption(QWidget *parent) :
     m_ui->comboColorTable->setItemIcon(7,index_7);
 
     // 默认的颜色
-    m_ui->labelSL->setPalette(QPalette(Qt::blue));
-    m_ui->labelRL->setPalette(QPalette(Qt::red));
-    m_ui->labelMC->setPalette(QPalette(Qt::green));
-    m_ui->labelMCRSL->setPalette(QPalette(Qt::yellow));
-    m_ui->labelMCRRL->setPalette(QPalette(Qt::black));
-    m_ui->labelSLC->setPalette(QPalette(Qt::blue));
-    m_ui->labelRLC->setPalette(QPalette(Qt::red));
-    m_ui->labelCMP->setPalette(QPalette(Qt::green));
+    m_ui->btnShotLineSC->setPalette(QPalette(Qt::blue));
+    m_ui->btnReceiverLineSC->setPalette(QPalette(Qt::red));
+    m_ui->btnMouseClickedSC->setPalette(QPalette(Qt::green));
+    m_ui->btnMouseRelationSCSL->setPalette(QPalette(Qt::yellow));
+    m_ui->btnMouseRelationSCRL->setPalette(QPalette(Qt::black));
+    m_ui->btnShotLineConSC->setPalette(QPalette(Qt::blue));
+    m_ui->btnReceiveLineConSC->setPalette(QPalette(Qt::red));
+    m_ui->btnCMPSC->setPalette(QPalette(Qt::green));
 
     shotLineColor=QColor(Qt::blue);
     receiveLineColor=QColor(Qt::red);
@@ -116,15 +116,6 @@ qjdOption::qjdOption(QWidget *parent) :
     m_ui->spinMouseClickedSize->setValue(6);
     m_ui->spinCMPSize->setValue(2);
 
-    //初始化显示值
-    m_ui->labelSL->setText(m_ui->spinShotLine->text());
-    m_ui->labelRL->setText(m_ui->spinReceiveLine->text());
-    m_ui->labelMC->setText(m_ui->spinMouseClicked->text());
-    m_ui->labelMCRSL->setText(m_ui->spinShotLineRelated->text());
-    m_ui->labelMCRRL->setText(m_ui->spinReceiveLineRelated->text());
-    m_ui->labelSLC->setText(m_ui->spinShotLineCon->text());
-    m_ui->labelRLC->setText(m_ui->spinReceiveLineCon->text());
-    m_ui->labelCMP->setText(m_ui->spinCMP->text());
 
     //radioButton group
     groupShotLine.addButton(m_ui->radioSL_Add);
@@ -150,10 +141,10 @@ qjdOption::qjdOption(QWidget *parent) :
     m_ui->radioCMP_Add->setChecked(true);
 
     /// cmp 精度
-    m_ui->comboCMPAccuracy->insertItem(0,"100%");
-    m_ui->comboCMPAccuracy->insertItem(1,"50%");
-    m_ui->comboCMPAccuracy->insertItem(2,"25%");
-    m_ui->comboCMPAccuracy->insertItem(3,"10%");
+//    m_ui->comboCMPAccuracy->insertItem(0,"100%");
+//    m_ui->comboCMPAccuracy->insertItem(1,"50%");
+//    m_ui->comboCMPAccuracy->insertItem(2,"25%");
+//    m_ui->comboCMPAccuracy->insertItem(3,"10%");
 
     /// 乱设layout 会断错误
         //m_ui->tabWidget->layout()->setSizeConstraint(QLayout::SetFixedSize);
@@ -311,7 +302,7 @@ void qjdOption::on_btnShotLineSC_clicked()
     QColorDialog a;
     shotLineColor = a.getColor();
     if (shotLineColor.isValid()) {
-        m_ui->labelSL->setPalette(QPalette(shotLineColor));
+        m_ui->btnShotLineSC->setPalette(QPalette(shotLineColor));
         flagShotLine=1;
     }
     else flagShotLine=0;
@@ -322,7 +313,7 @@ void qjdOption::on_btnReceiverLineSC_clicked()
     QColorDialog a;
     receiveLineColor = a.getColor();
     if (receiveLineColor.isValid()) {
-        m_ui->labelRL->setPalette(QPalette(receiveLineColor));
+        m_ui->btnReceiverLineSC->setPalette(QPalette(receiveLineColor));
         flagReceiveLine=1;
     }
     else flagReceiveLine=0;
@@ -333,7 +324,7 @@ void qjdOption::on_btnMouseClickedSC_clicked()
     QColorDialog a;
     mouseClickedColor = a.getColor();
     if (mouseClickedColor.isValid()) {
-        m_ui->labelMC->setPalette(QPalette(mouseClickedColor));
+        m_ui->btnMouseClickedSC->setPalette(QPalette(mouseClickedColor));
         flagMouseClicked=1;
     }
     else flagMouseClicked=0;
@@ -344,7 +335,7 @@ void qjdOption::on_btnMouseRelationSCSL_clicked()
     QColorDialog a;
     shotLineRelatedColor = a.getColor();
     if (shotLineRelatedColor.isValid()) {
-        m_ui->labelMCRSL->setPalette(QPalette(shotLineRelatedColor));
+        m_ui->btnMouseRelationSCSL->setPalette(QPalette(shotLineRelatedColor));
         flagShotLineRelated=1;
     }
     else flagShotLineRelated=0;
@@ -355,7 +346,7 @@ void qjdOption::on_btnMouseRelationSCRL_clicked()
     QColorDialog a;
     receiveLineRelatedColor = a.getColor();
     if (receiveLineRelatedColor.isValid()) {
-        m_ui->labelMCRRL->setPalette(QPalette(receiveLineRelatedColor));
+        m_ui->btnMouseRelationSCRL->setPalette(QPalette(receiveLineRelatedColor));
         flagReceiveLineRelated=1;
     }
     else flagReceiveLineRelated=0;
@@ -366,7 +357,7 @@ void qjdOption::on_btnShotLineConSC_clicked()
     QColorDialog a;
     shotLineConColor = a.getColor();
     if (shotLineConColor.isValid()) {
-        m_ui->labelSLC->setPalette(QPalette(shotLineConColor));
+        m_ui->btnShotLineConSC->setPalette(QPalette(shotLineConColor));
         flagShotLineCon=1;
     }
     else flagShotLineCon=0;
@@ -377,7 +368,7 @@ void qjdOption::on_btnReceiveLineConSC_clicked()
     QColorDialog a;
     receiveLineConColor = a.getColor();
     if (receiveLineConColor.isValid()) {
-        m_ui->labelRLC->setPalette(QPalette(receiveLineConColor));
+        m_ui->btnReceiveLineConSC->setPalette(QPalette(receiveLineConColor));
         flagReceiveLineCon=1;
     }
     else flagReceiveLineCon=0;
@@ -388,7 +379,7 @@ void qjdOption::on_btnCMPSC_clicked()
     QColorDialog a;
     CMP_Color = a.getColor();
     if (CMP_Color.isValid()) {
-        m_ui->labelCMP->setPalette(QPalette(CMP_Color));
+        m_ui->btnCMPSC->setPalette(QPalette(CMP_Color));
         flagCMP=1;
     }
     else flagCMP=0;
@@ -396,56 +387,48 @@ void qjdOption::on_btnCMPSC_clicked()
 
 void qjdOption::on_spinShotLine_valueChanged(QString s)
 {
-    m_ui->labelSL->setText(s);
     shotLineValue=s.toDouble();
     flagShotLine=1;
 }
 
 void qjdOption::on_spinReceiveLine_valueChanged(QString s)
 {
-    m_ui->labelRL->setText(s);
     receiveLineValue=s.toDouble();
     flagReceiveLine=1;
 }
 
 void qjdOption::on_spinMouseClicked_valueChanged(QString s)
 {
-    m_ui->labelMC->setText(s);
     mouseClickedValue=s.toDouble();
     flagMouseClicked=1;
 }
 
 void qjdOption::on_spinShotLineRelated_valueChanged(QString s)
 {
-    m_ui->labelMCRSL->setText(s);
     shotLineRelatedValue=s.toDouble();
     flagShotLineRelated=1;
 }
 
 void qjdOption::on_spinReceiveLineRelated_valueChanged(QString s)
 {
-    m_ui->labelMCRRL->setText(s);
     receiveLineRelatedValue=s.toDouble();
     flagReceiveLineRelated=1;
 }
 
 void qjdOption::on_spinShotLineCon_valueChanged(QString s)
 {
-    m_ui->labelSLC->setText(s);
     shotLineConValue=s.toDouble();
     flagShotLineCon=1;
 }
 
 void qjdOption::on_spinReceiveLineCon_valueChanged(QString s)
 {
-    m_ui->labelRLC->setText(s);
     receiveLineConValue=s.toDouble();
     flagReceiveLineCon=1;
 }
 
 void qjdOption::on_spinCMP_valueChanged(QString s)
 {
-    m_ui->labelCMP->setText(s);
     CMP_Value=s.toDouble();
     flagCMP=1;
 }
@@ -519,12 +502,4 @@ void qjdOption::decideShape()
         int x=m_ui->spinCMPSize->value();
         emit signalCMPShape(3,x);
     }
-}
-
-// 改变同时便进行setCMP，减轻画图压力
-void qjdOption::on_comboCMPAccuracy_currentIndexChanged(int index)
-{
-    //CMP精度
-    int acc=index;
-    emit signalCMPAccuracy(acc);
 }

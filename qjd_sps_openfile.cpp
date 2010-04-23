@@ -11,7 +11,7 @@ qjdOpenFile::qjdOpenFile(QWidget *parent) :
     m_ui->setupUi(this);
     whiteString="";
     filedialog=new QFileDialog();
-    m_ui->groupUnit->hide();
+//    m_ui->groupUnit->hide();
     connect(m_ui->btnSFile,SIGNAL(clicked()),this,SLOT(btnSPress()));
     connect(m_ui->btnRFile,SIGNAL(clicked()),this,SLOT(btnRPress()));
     connect(m_ui->btnXFile,SIGNAL(clicked()),this,SLOT(btnXPress()));

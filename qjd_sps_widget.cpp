@@ -26,7 +26,6 @@ qjdWidget::qjdWidget(QWidget *)
     six=0;
     seven=0;
 
-    skipNum=0;
     flagXie=false;
     flagZheng=false;
     zeroPoint.setX(0);
@@ -75,13 +74,13 @@ void qjdWidget::paintEvent(QPaintEvent *)
     if(rON==true)
     {
         paintRfileRelation(&painter);
-        paintMrRight(&painter);
+        paintPlus(&painter);
     }
 
     if(sON==true)
     {
         paintSfileRelation(&painter);
-        paintMrRight(&painter);
+        paintPlus(&painter);
     }
 
     if (rubberBandIsShown)
@@ -110,7 +109,7 @@ void qjdWidget::refreshPixmap()
     update();       //作为立即生效使用，不写的话只是不立即显示，拖动之后仍然正常显示
 }
 
-void qjdWidget::paintMrRight(QPainter *painter)
+void qjdWidget::paintPlus(QPainter *painter)
 {
     for(int a=0;a<SNumber;a++)
     {
@@ -408,8 +407,6 @@ void qjdWidget::setCMP()  //设置覆盖次数像素点    //一次性设置
                             qreal cd=norR[c+e];
                             axisXX<<(ab+ESTSP)/2;                  //计算出来的大地坐标的中点坐标值
                             axisYY<<(cd+NORSP)/2;
-
-                            e+=skipNum;       //省略点的控制,也可做成控制
                         }
                     }
                 }
@@ -523,9 +520,9 @@ void qjdWidget::paintCMP(QPainter *painter)  //画覆盖次数像素点
 }
 
 
-void qjdWidget::setFoldNumbers()
+void qjdWidget::setFoldNumbersZheng()
 {
-    qDebug()<<"setFold";
+    qDebug()<<"setFoldZheng";
     singleWidView=QString::number(singleWid);
     singleHeiView=QString::number(singleHei);
 
@@ -533,9 +530,11 @@ void qjdWidget::setFoldNumbers()
     gridX=0;
     gridY=0;
 
+    /// 此处网格多于分辨率会导致图像溢出
     eastBoxNumber=(int)(drawWid/singleWid);       //总共有多少网格
     northBoxNumber=(int)(drawHei/singleHei);
-
+    qDebug()<<singleHei<<northBoxNumber<<height();
+//    qDebug()<<singleWid<<eastBoxNumber<<width();
     boxAB.clear();
     boxAB.resize(eastBoxNumber);    //初始化动态二维数组
     for(int i=0;i<eastBoxNumber;i++)
@@ -551,8 +550,8 @@ void qjdWidget::setFoldNumbers()
         //        qDebug()<<"a"<<a<<SNumber;
         for(int b=0;b<XNumber;b++)
         {
-            //            if(a>1535)
-            //            qDebug()<<"b"<<b<<XNumber;
+            // if(a>1535)
+            //     qDebug()<<"b"<<b<<XNumber;
             if(SLINENAME==xlinename[b] && SPOINTNUMBER==xpointnumber[b])
             {
                 XRECEIVELINENAME=xreceivelinename[b];
@@ -561,8 +560,8 @@ void qjdWidget::setFoldNumbers()
 
                 for(int c=0;c<RNumber;c++)
                 {
-                    //                    if(b>=15398)
-                    //                    qDebug()<<c<<RNumber;
+                    //if(b>=15398)
+                    //  qDebug()<<c<<RNumber;
                     if(XRECEIVELINENAME==rlinename[c] && XFROMRECEIVER==rpointnumber[c])
                     {
                         int d=(int)(XTORECEIVER-XFROMRECEIVER);       //注意d少一个，循环要加上
@@ -599,7 +598,7 @@ void qjdWidget::setFoldNumbers()
     //    }
 }
 
-void qjdWidget::setInterpolation()
+void qjdWidget::setInterpolationZheng()
 {
     boxAY.clear();
     boxAY.resize(eastBoxNumber);            //初始化AY数组
@@ -613,50 +612,43 @@ void qjdWidget::setInterpolation()
 
     /*-------------------------------双线插值显示覆盖次数-------------------------------------*/
     unitX=(eastBoxNumber-1)*1./(width()-1);
-    unitY=(northBoxNumber-1)*1./(height()-1);         //注意：这里的northBoxNumber不能大于width（）,否则会引起错误
+    unitY=(northBoxNumber-1)*1./(height()-1);         /// 注意：这里的northBoxNumber不能大于width（）,否则会引起错误
+    qDebug()<<northBoxNumber<<height()<<unitY;
 
     for(int a=0;a<eastBoxNumber;a++)                    //纵向插值,[a][b]-->[a][height()]
     {
         int xyz=0;
         for(int y=0;y<height()-1;y++)
         {
-            if(y*unitY<xyz+1 && y*unitY>=xyz)
+            if(y*unitY<xyz+ceil(unitY) && y*unitY>=xyz)
             {
-                //qDebug()<<"y"<<b<<b*unitY<<xyz;
+                // do nothing
             }
             else
-                xyz++;
+                xyz=xyz+(int)(ceil(unitY));
 
+//            qDebug()<<"a"<<a<<"xyz"<<xyz<<"y"<<y<<"~~~~~";
             pixelValue=(int)(boxAB[a][xyz]+(y*unitY-(int)(y*unitY))*(boxAB[a][xyz+1]-boxAB[a][xyz]));
             boxAY[a][y]=pixelValue;
         }
     }
 
+
     int ABC;                                  //横向插值,[a][height()]-->[width()][height()]
-    //    boxX.clear();
-    //    boxY.clear();
-    //    boxValue.clear();
     emit signalMaxSet(height()-1);
     for(int Y=0;Y<height();Y++)
     {
         ABC=0;
         for(int X=0;X<width()-1;X++)
         {
-
-            if(X*unitX<ABC+1 && X*unitX>=ABC)
+            if(X*unitX<ABC+ceil(unitX) && X*unitX>=ABC)
             {
-                //qDebug()<<"y"<<b<<b*unitY<<xyz;
+                // do nothing
             }
             else
-                ABC++;
+                ABC=ABC+(int)(ceil(unitX));
 
             pixelValue=(int)(boxAY[ABC][Y]+(X*unitX-ABC)*(boxAY[ABC+1][Y]-boxAY[ABC][Y]));
-            //            if(pixelValue!=0)
-            //            {
-            //                boxX<<X;
-            //                boxY<<Y;
-            //                boxValue<<pixelValue;
-            //            }
             boxXY[X][Y]=pixelValue;
 
         }
@@ -668,6 +660,7 @@ void qjdWidget::setInterpolation()
 
 void qjdWidget::paintFoldNumbers(QPainter *painter)
 {
+    qDebug()<<"paint FOLD";
     QImage image(width(),height(),QImage::Format_ARGB32);    
     int colorValue;
     setColorTable();                    //设置眼色表
@@ -678,7 +671,7 @@ void qjdWidget::paintFoldNumbers(QPainter *painter)
         if(foldIsChanged==true)
         {
             qDebug()<<"cha zhi zhong";
-            setInterpolation();             //设置像素插值
+            setInterpolationZheng();             //设置像素插值
             foldIsChanged=false;
         }
         for(int i=0;i<width();i++)          //给每个像素上色
@@ -697,7 +690,7 @@ void qjdWidget::paintFoldNumbers(QPainter *painter)
     {        
         if(foldIsChanged==true)
         {
-            setInterpolationTransform();
+            setInterpolationXie();
             setAxisTransform();
             foldIsChanged=false;
 
@@ -976,8 +969,9 @@ void qjdWidget::axisTransform()
 }
 
 /*--------------对竖直坐标系求覆盖次数------------*/
-void qjdWidget::setFoldTransform()
+void qjdWidget::setFoldXie()
 {
+    qDebug()<<"setFoldXie";
     singleWidTView=QString::number(singleWidT);
     singleHeiTView=QString::number(singleHeiT);
 
@@ -1035,6 +1029,7 @@ void qjdWidget::setFoldTransform()
             }
         }
     }
+    qDebug()<<"setFoldXieOut";
     //    QFile file("fold1.data");
     //    file.open(QIODevice::WriteOnly);
     //    QDataStream out(&file);               //输出文件
@@ -1048,8 +1043,9 @@ void qjdWidget::setFoldTransform()
 }
 
 /*--------------在垂直坐标系中进行插值-----------*/
-void qjdWidget::setInterpolationTransform()
+void qjdWidget::setInterpolationXie()
 {
+    qDebug()<<"setInterXie";
     boxCY.clear();
     boxCY.resize(eastBoxNumberT);            //初始化CY数组
     for(int j=0;j<eastBoxNumberT;j++)
@@ -1070,12 +1066,12 @@ void qjdWidget::setInterpolationTransform()
         int xyz=0;
         for(int y=0;y<height()-1;y++)
         {
-            if(y*unitYT<xyz+1 && y*unitYT>=xyz)
+            if(y*unitYT<xyz+ceil(unitYT) && y*unitYT>=xyz)
             {
                 //qDebug()<<"y"<<b<<b*unitY<<xyz;
             }
             else
-                xyz++;
+                xyz=xyz+(int)(ceil(unitYT));
 
             pixelValueT=(int)(boxCD[c][xyz]+(y*unitYT-(int)(y*unitYT))*(boxCD[c][xyz+1]-boxCD[c][xyz]));
             boxCY[c][y]=pixelValueT;
@@ -1090,12 +1086,12 @@ void qjdWidget::setInterpolationTransform()
         for(int X=0;X<width()-1;X++)
         {
 
-            if(X*unitXT<ABC+1 && X*unitXT>=ABC)
+            if(X*unitXT<ABC+ceil(unitXT) && X*unitXT>=ABC)
             {
                 //qDebug()<<"y"<<b<<b*unitY<<xyz;
             }
             else
-                ABC++;
+                ABC=ABC+(int)(ceil(unitXT));
 
             pixelValueT=(int)(boxCY[ABC][Y]+(X*unitXT-ABC)*(boxCY[ABC+1][Y]-boxCY[ABC][Y]));
             boxXYT[X][Y]=pixelValueT;
@@ -1105,6 +1101,7 @@ void qjdWidget::setInterpolationTransform()
             }
         }
     }
+    qDebug()<<"setInterXieOut";
 }
 
 
@@ -1153,7 +1150,6 @@ void qjdWidget::setAxisTransform()
         emit signalValueSet(i);
     }
     emit signalHideBar();
-
 }
 
 /*--------------设置颜色表-------------*/
@@ -1461,23 +1457,4 @@ void qjdWidget::setCMPShape(int n,int x)
         break;
     }
     CMP_Size=x;
-}
-
-void qjdWidget::setCMPAccuracy(int acc)
-{
-    switch(acc)
-    {
-    case 0:
-        skipNum=0;break;
-    case 1:
-        skipNum=1;break;
-    case 2:
-        skipNum=3;break;
-    case 3:
-        skipNum=8;break;
-    default:
-        break;
-    }
-    setCMP();       //先行设置
-    cmpIsChanged=true;
 }

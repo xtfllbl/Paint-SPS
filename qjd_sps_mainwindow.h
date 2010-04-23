@@ -17,6 +17,7 @@
 #include "qjd_sps_option.h"
 #include "qjd_sps_help.h"
 #include <QProgressBar>
+#include <QTimer>
 
 namespace Ui
 {
@@ -51,6 +52,8 @@ public:
     char *Rpointnumber;
 
 private:
+    long COUNT;
+    QTimer *paintTimer;
     int HBarValue;
     int VBarValue;
     int HBarMax;
@@ -77,7 +80,8 @@ private:
     QLabel *statusLabel4;
     QLabel *statusLabel5;
     QProgressBar *pBar;
-
+    QLabel *perWidget;
+    int perWidgetMax;
     QPoint point;
 
     int firstLineS;

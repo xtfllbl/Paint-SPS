@@ -163,7 +163,7 @@
        </property>
        <property name="icon">
         <iconset resource="image.qrc">
-         <normaloff>:/new/prefix1/image/Crystal_Clear_action_apply.png</normaloff>:/new/prefix1/image/Crystal_Clear_action_apply.png</iconset>
+         <normaloff>:/new/prefix1/image/3.png</normaloff>:/new/prefix1/image/3.png</iconset>
        </property>
        <property name="shortcut">
         <string>Return</string>
@@ -183,7 +183,7 @@
        </property>
        <property name="icon">
         <iconset resource="image.qrc">
-         <normaloff>:/new/prefix1/image/Crystal_Clear_action_button_cancel.png</normaloff>:/new/prefix1/image/Crystal_Clear_action_button_cancel.png</iconset>
+         <normaloff>:/new/prefix1/image/8.png</normaloff>:/new/prefix1/image/8.png</iconset>
        </property>
        <property name="shortcut">
         <string>Esc</string>
