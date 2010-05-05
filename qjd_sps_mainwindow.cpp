@@ -59,12 +59,9 @@ qjdMainWindow::qjdMainWindow(QWidget *parent): QMainWindow(parent), ui(new Ui::M
     statusLabel4=new QLabel();
     statusLabel5=new QLabel();
 
-    pBar=new QProgressBar();
-//    pBar->hide();
-
+    pBar=new QProgressBar();    //存在是为了perWidget
     perWidget = new QLabel();
     perWidget->setPixmap(QPixmap(":/progress/pg/00.png"));
-//    perWidget->setAutoFillBackground(true);
 
 //    statusLabel1->setFixedWidth(200);
 //    statusLabel2->setFixedWidth(130);
@@ -124,7 +121,7 @@ qjdMainWindow::qjdMainWindow(QWidget *parent): QMainWindow(parent), ui(new Ui::M
     /// 设置进度
     connect(my,SIGNAL(signalMaxSet(int)),this,SLOT(setProgressBar(int)));
     connect(my,SIGNAL(signalValueSet(int)),this,SLOT(setProgressBarValue(int)));
-    connect(my,SIGNAL(signalHideBar()),this,SLOT(hideBar()));
+//    connect(my,SIGNAL(signalHideBar()),this,SLOT(hideBar()));
 
     /// 接受发送各线的颜色
     //my
@@ -1525,7 +1522,7 @@ void qjdMainWindow::setProgressBar(int max)
     pBar->setMaximum(max);
     pBar->setValue(0);
 
-    qDebug()<<"show";
+//    qDebug()<<"show";
 //    perWidget->show();
     perWidget->setPixmap(QPixmap(":/progress/pg/00.png"));
     perWidgetMax=max;

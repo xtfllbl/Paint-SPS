@@ -328,7 +328,7 @@ private:
 signals:
     void signalMaxSet(int max);
     void signalValueSet(int value);
-    void signalHideBar();
+//    void signalHideBar();
 
 protected:
     void paintEvent(QPaintEvent *);

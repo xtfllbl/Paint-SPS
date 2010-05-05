@@ -414,7 +414,7 @@ void qjdWidget::setCMP()  //设置覆盖次数像素点    //一次性设置
         }
         emit signalValueSet(a);
     }
-    emit signalHideBar();
+//    emit signalHideBar();
 }
 
 void qjdWidget::paintCMP(QPainter *painter)  //画覆盖次数像素点
@@ -540,6 +540,7 @@ void qjdWidget::setFoldNumbersZheng()
     for(int i=0;i<eastBoxNumber;i++)
         boxAB[i].resize(northBoxNumber);
 
+    emit signalMaxSet(SNumber-1);
     for(int a=0;a<SNumber;a++)
     {
         SLINENAME=slinename[a];
@@ -584,8 +585,8 @@ void qjdWidget::setFoldNumbersZheng()
                 }
             }
         }
+        emit signalValueSet(a);
     }
-    qDebug()<<"setFoldOut";
     //    QFile file("fold.data");
     //    file.open(QIODevice::WriteOnly);
     //    QDataStream out(&file);               //输出文件
@@ -615,6 +616,7 @@ void qjdWidget::setInterpolationZheng()
     unitY=(northBoxNumber-1)*1./(height()-1);         /// 注意：这里的northBoxNumber不能大于width（）,否则会引起错误
     qDebug()<<northBoxNumber<<height()<<unitY;
 
+    emit signalMaxSet(eastBoxNumber-1);
     for(int a=0;a<eastBoxNumber;a++)                    //纵向插值,[a][b]-->[a][height()]
     {
         int xyz=0;
@@ -631,6 +633,7 @@ void qjdWidget::setInterpolationZheng()
             pixelValue=(int)(boxAB[a][xyz]+(y*unitY-(int)(y*unitY))*(boxAB[a][xyz+1]-boxAB[a][xyz]));
             boxAY[a][y]=pixelValue;
         }
+        emit signalValueSet(a);
     }
 
 
@@ -654,7 +657,7 @@ void qjdWidget::setInterpolationZheng()
         }
         emit signalValueSet(Y);
     }
-    emit signalHideBar();
+//    emit signalHideBar();
 
 }
 
@@ -988,6 +991,7 @@ void qjdWidget::setFoldXie()
     gridXT=0;
     gridYT=0;
 
+    emit signalMaxSet(SNumber-1);
     for(int a=0;a<SNumber;a++)
     {
         SLINENAME=slinename[a];
@@ -1028,8 +1032,8 @@ void qjdWidget::setFoldXie()
                 }
             }
         }
+        emit signalValueSet(a);
     }
-    qDebug()<<"setFoldXieOut";
     //    QFile file("fold1.data");
     //    file.open(QIODevice::WriteOnly);
     //    QDataStream out(&file);               //输出文件
@@ -1061,6 +1065,7 @@ void qjdWidget::setInterpolationXie()
     unitXT=(eastBoxNumberT-1)*1./(width()-1);
     unitYT=(northBoxNumberT-1)*1./(height()-1);         //注意：这里的northBoxNumber不能大于width（）,否则会引起错误---->这个想法是错误的
 
+    emit signalMaxSet(eastBoxNumberT-1);
     for(int c=0;c<eastBoxNumberT;c++)                    //纵向插值,[c][d]-->[c][height()]
     {
         int xyz=0;
@@ -1076,10 +1081,12 @@ void qjdWidget::setInterpolationXie()
             pixelValueT=(int)(boxCD[c][xyz]+(y*unitYT-(int)(y*unitYT))*(boxCD[c][xyz+1]-boxCD[c][xyz]));
             boxCY[c][y]=pixelValueT;
         }
+        emit signalValueSet(c);
     }
 
     int ABC;                                  //横向插值,[c][height()]-->[width()][height()]
     int count=0;
+    emit signalMaxSet(height()-1);
     for(int Y=0;Y<height();Y++)
     {
         ABC=0;
@@ -1100,8 +1107,8 @@ void qjdWidget::setInterpolationXie()
                 count++;
             }
         }
+        emit signalValueSet(Y-1);
     }
-    qDebug()<<"setInterXieOut";
 }
 
 
@@ -1149,7 +1156,7 @@ void qjdWidget::setAxisTransform()
         }
         emit signalValueSet(i);
     }
-    emit signalHideBar();
+//    emit signalHideBar();
 }
 
 /*--------------设置颜色表-------------*/
