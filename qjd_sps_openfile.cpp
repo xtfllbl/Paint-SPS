@@ -17,6 +17,12 @@ qjdOpenFile::qjdOpenFile(QWidget *parent) :
     connect(m_ui->btnXFile,SIGNAL(clicked()),this,SLOT(btnXPress()));
     connect(m_ui->btnOK,SIGNAL(clicked()),this,SLOT(btnOKPress()));
     layout()->setSizeConstraint(QLayout::SetFixedSize);     //设一下layout，窗口伸缩轻松自如
+
+    QFile file(":/styles/stylesheet.qss");
+    file.open(QIODevice::ReadOnly);
+    QTextStream in(&file);
+    QString s = in.readAll();
+    this->setStyleSheet(s);
 }
 
 qjdOpenFile::~qjdOpenFile()

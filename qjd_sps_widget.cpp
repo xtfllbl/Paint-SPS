@@ -92,6 +92,7 @@ void qjdWidget::paintEvent(QPaintEvent *)
 
 void qjdWidget::refreshPixmap()
 {
+    qDebug()<<"refreash";
     pixmap = QPixmap(size());
     pixmap.fill(this, 0, 0);
     
@@ -1332,6 +1333,7 @@ void qjdWidget::setColorTable()
             colorTable<<qRgb(r,g,b);
         }
     }
+//    qDebug()<<colorTable;
 }
 
 /// 颜色

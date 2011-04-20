@@ -2,12 +2,18 @@
 #include "ui_qjd_sps_option.h"
 #include <QDebug>
 #include <QDesktopWidget>
-
+#include <QFile>
 qjdOption::qjdOption(QWidget *parent) :
         QDialog(parent),
         m_ui(new Ui::Option)
 {
     m_ui->setupUi(this);
+
+    QFile file(":/styles/stylesheet.qss");
+    file.open(QIODevice::ReadOnly);
+    QTextStream in(&file);
+    QString s = in.readAll();
+    this->setStyleSheet(s);
 
     isIndex_0=0;
     isIndex_1=0;

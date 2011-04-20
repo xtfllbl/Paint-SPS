@@ -72,5 +72,17 @@
         <file>pg/90.png</file>
         <file>pg/95.png</file>
         <file>pg/100.png</file>
+        <file>pg/1.png</file>
+        <file>pg/2.png</file>
+        <file>pg/3.png</file>
+        <file>pg/4.png</file>
+        <file>pg/5.png</file>
+        <file>pg/6.png</file>
+        <file>pg/7.png</file>
+        <file>pg/8.png</file>
+        <file>pg/9.png</file>
+        <file>pg/10a.png</file>
+        <file>pg/11.png</file>
+        <file>pg/12.png</file>
     </qresource>
 </RCC>

@@ -95,11 +95,11 @@ qjdMainWindow::qjdMainWindow(QWidget *parent): QMainWindow(parent), ui(new Ui::M
     QGridLayout *layout = new QGridLayout( );
     layout->addWidget(label1,0,0);
     layout->addWidget(label2,1,0);
-    layout->addWidget(scrollarea,1,1);
+    layout->addWidget(scrollarea,1,1);  //layout 中加入
     layout->addWidget(label3,1,2);
     layout->addWidget(label4,2,0);
-    ui->mainw->setLayout(layout);
-    setCentralWidget(ui->mainw);
+    ui->mainw->setLayout(layout);  //设置layout
+    setCentralWidget(ui->mainw);  //设置显示
 
     scrollarea->resize(640,613);
 
@@ -171,6 +171,12 @@ qjdMainWindow::qjdMainWindow(QWidget *parent): QMainWindow(parent), ui(new Ui::M
      paintTimer=new QTimer(this);
      connect(paintTimer,SIGNAL(timeout()),this,SLOT(update()));
      paintTimer->start(500);
+
+     QFile file(":/styles/stylesheet.qss");
+     file.open(QIODevice::ReadOnly);
+     QTextStream in(&file);
+     QString s = in.readAll();
+     this->setStyleSheet(s);
 }
 
 qjdMainWindow::~qjdMainWindow()
@@ -442,6 +448,44 @@ void qjdMainWindow::setFileLocation()
     qDebug()<<my->SNumber<<my->RNumber<<my->XNumber;
 }
 
+void qjdMainWindow::mousePressEvent( QMouseEvent *event)
+{
+    my->MrRight=0;
+    my->MissRight=0;
+
+    if(openS && ui->actionRelation->isChecked())
+    {
+        if(event->button()==Qt::LeftButton)
+        {
+            my->rubberBandIsShown=false;
+            QPoint point =  my->mapFromGlobal(event->globalPos());
+            my->mr=my->minDrawE+(point.x())*my->drawWid/(my->width());
+            my->miss=my->minDrawN+ ((my->height())-(point.y()))   *my->drawHei/(my->height());
+            my->decide();       // 判断点击的是炮点还是检波点
+            my->update();
+        }
+    }
+    if(openS)
+    {
+        if(event->button()==Qt::LeftButton)
+        {
+            my->rubberBandIsShown=false;
+        }
+        if(event->button()==Qt::RightButton)
+        {
+            my->rubberBandIsShown=true;
+            my->mouseRightZoom=true;
+            setCursor(Qt::CrossCursor);
+            QPoint point =  my->mapFromGlobal(event->globalPos());
+            my->rubberBandRect.setTopLeft(point);
+            my->rubberBandRect.setBottomRight(point);
+            my->updateRubberBandRegion();
+            //my->refreshPixmap();      //单击不要刷新,可减少一次插值
+        }
+    }
+
+}
+
 void qjdMainWindow::mouseMoveEvent ( QMouseEvent *event )
 {
     QPoint point =  my->mapFromGlobal(event->globalPos());
@@ -449,13 +493,13 @@ void qjdMainWindow::mouseMoveEvent ( QMouseEvent *event )
     {
         my->updateRubberBandRegion();
         if(point.x() <1){                               //只能确保不落在mywidget的外面
-            point.setX(1);;
+            point.setX(1);
         }
         else if(point.x() > my->width() - 1){
             point.setX(my->width() - 1);
         }
         if(point.y() <1){
-            point.setY(1);;
+            point.setY(1);
         }
         else if(point.y() > my->height() - 1){
             point.setY(my->height() - 1);
@@ -558,58 +602,8 @@ void qjdMainWindow::mouseMoveEvent ( QMouseEvent *event )
     }
 }
 
-void qjdMainWindow::mousePressEvent( QMouseEvent *event)
-{
-    my->MrRight=0;
-    my->MissRight=0;
-
-    if(openS && ui->actionRelation->isChecked())
-    {
-        if(event->button()==Qt::LeftButton)
-        {
-            my->rubberBandIsShown=false;
-            QPoint point =  my->mapFromGlobal(event->globalPos());
-            my->mr=my->minDrawE+(point.x())*my->drawWid/(my->width());
-            my->miss=my->minDrawN+ ((my->height())-(point.y()))   *my->drawHei/(my->height());
-            my->decide();       // 判断点击的是炮点还是检波点
-            my->update();
-        }
-    }
-    if(openS)
-    {
-        if(event->button()==Qt::LeftButton)
-        {
-            my->rubberBandIsShown=false;
-        }
-        if(event->button()==Qt::RightButton)
-        {
-            my->rubberBandIsShown=true;
-            my->mouseRightZoom=true;
-            setCursor(Qt::CrossCursor);
-            QPoint point =  my->mapFromGlobal(event->globalPos());
-            my->rubberBandRect.setTopLeft(point);
-            my->rubberBandRect.setBottomRight(point);
-            my->updateRubberBandRegion();
-            //my->refreshPixmap();      //单击不要刷新,可减少一次插值
-        }
-    }
-
-}
-
 void qjdMainWindow::mouseDoubleClickEvent(QMouseEvent *)
-{
-//    my->HOldIncrease=1;
-//    my->VOldIncrease=1;
-//    ui->actionReset->setEnabled(false);
-//
-//    my->resize(scrollarea->width(),scrollarea->height());
-//
-//    my->mouseRightZoom=false;
-//    HScrollBar->setValue(0);
-//    VScrollBar->setValue(0);
-//
-//    my->refreshPixmap();
-}
+{}
 
 void qjdMainWindow::mouseReleaseEvent ( QMouseEvent *event )
 {
@@ -625,14 +619,9 @@ void qjdMainWindow::mouseReleaseEvent ( QMouseEvent *event )
 
 
         QRect rect = my->rubberBandRect.normalized();
-        double RealWidth;
-        double RealHeight;
 
         my->rectWidth=rect.width();
         my->rectHeight=rect.height();
-
-        RealWidth=rect.topRight().x()*my->drawWid/my->width()-rect.topLeft().x()*my->drawWid/my->width();
-        RealHeight=rect.bottomLeft().y()*my->drawHei/my->height()-rect.topLeft().y()*my->drawHei/my->height();
 
         my->HIncrease=scrollarea->width()*1./rect.width();        //不要按照全局的来，按照局部的来
         my->VIncrease=scrollarea->height()*1./rect.height();
@@ -875,7 +864,7 @@ void qjdMainWindow::paintCor(QPainter *painter)
     painter->setPen(QPen(Qt::black,2,Qt::SolidLine,Qt::RoundCap));
 
     /*----------------------------------------------------------------------------------*/
-    /*                           画坐标轴                          */
+    /*                           画坐标轴                                                                                 */
     /*----------------------------------------------------------------------------------*/
     //Axis X
     painter->drawLine(point.x(),scrollarea->height()+40+ui->mainToolBar->height()+more+ui->menuBar->height(),
@@ -931,18 +920,17 @@ void qjdMainWindow::paintCor(QPainter *painter)
     painter->drawText(scrollarea->width()+more+point.x()-4,40+ui->mainToolBar->height()+ui->menuBar->height()-7,"N");
 
     /*----------------------------------------------------------------------------------*/
-    /*                           写坐标值                          */
+    /*                           写坐标值                                                                                 */
     /*----------------------------------------------------------------------------------*/
 
     painter->setLayoutDirection(Qt::LeftToRight);
     if(openS==true)
     {
-//        qDebug()<<"Write zuo biao";
         for(int x=0;x<=(scrollarea->width()/100);x++)        //set Axis X text
         {
             qreal Hplus;
             QString a;
-            Hplus=my->drawWid*HScrollBar->value()/my->width();            
+            Hplus=my->drawWid*HScrollBar->value()/my->width();
             a=QString::number(my->minDrawE+Hplus+(my->drawWid*100*x/my->width()));
             painter->drawText(100*x+point.x()-more,
                               scrollarea->height()+40+ui->mainToolBar->height()+2*more+ui->menuBar->height(),
@@ -958,7 +946,6 @@ void qjdMainWindow::paintCor(QPainter *painter)
             Vplus=my->drawHei*(VScrollBar->maximum()-VScrollBar->value())/my->height();          
             a=(int)(my->minDrawN+Vplus+(my->drawHei*100*y/my->height()));
             b=QString::number(a);
-            //qDebug()<<y<<b[y]<<(my->drawHei*100*y/my->height())<<Vplus;
 
             painter->drawText(scrollarea->width()+more+point.x()+10,
                               40+ui->mainToolBar->height()+scrollarea->height()-100*y+5+ui->menuBar->height(),
@@ -974,8 +961,8 @@ void qjdMainWindow::paintCor(QPainter *painter)
     }
 
     /*----------------------------------------------------------------------------------*/
-    /*                           画色表                             */
-    /*---------------------------------------------------------------------------------*/
+    /*                           画色表                                                              */
+    /*----------------------------------------------------------------------------------*/
     if(my->foldModeON==true)
     {
         QImage imageTable(30,scrollarea->height(),QImage::Format_ARGB32);
@@ -1103,7 +1090,7 @@ void qjdMainWindow::paintCor(QPainter *painter)
         painter->drawLine(point.x()+300-SLSize,85-SLSize,point.x()+300+SLSize,85-SLSize);
         painter->drawLine(point.x()+300-SLSize,85-SLSize,point.x()+300-SLSize,85+SLSize);
     }
-    /// 暂时依靠定时器更新
+    /// 暂时依靠定时器更新 !!!!
 //    repaint();
 //    update();     //这句加了遗憾半年，不加，也有遗憾，坐标轴不动了
 }

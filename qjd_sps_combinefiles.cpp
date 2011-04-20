@@ -14,6 +14,12 @@ qjdCombineFiles::qjdCombineFiles(QWidget *parent) :
     model=new QStringListModel(this);
     combineSuccess=false;
 
+    QFile file(":/styles/stylesheet.qss");
+    file.open(QIODevice::ReadOnly);
+    QTextStream in(&file);
+    QString s = in.readAll();
+    this->setStyleSheet(s);
+
 }
 
 qjdCombineFiles::~qjdCombineFiles()

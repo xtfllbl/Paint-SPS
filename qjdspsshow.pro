@@ -23,6 +23,10 @@ FORMS += qjd_sps_mainwindow.ui \
     qjd_sps_combinefiles.ui \
     qjd_sps_option.ui \
     qjd_sps_help.ui
-RESOURCES += image.qrc
+RESOURCES += image.qrc \
+    styles.qrc
 TRANSLATIONS =qjdspsshow_cn.ts \
                         qjsspsshow_en.ts
+
+OTHER_FILES += \
+    styles/stylesheet.qss

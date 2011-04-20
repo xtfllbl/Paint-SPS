@@ -1,5 +1,7 @@
 #include "qjd_sps_help.h"
 #include "ui_qjd_sps_help.h"
+#include <QFile>
+#include <QTextStream>
 
 qjdHelp::qjdHelp(QWidget *parent) :
     QDialog(parent),
@@ -7,6 +9,12 @@ qjdHelp::qjdHelp(QWidget *parent) :
 {
     m_ui->setupUi(this);
     layout()->setSizeConstraint(QLayout::SetFixedSize);
+
+    QFile file(":/styles/stylesheet.qss");
+    file.open(QIODevice::ReadOnly);
+    QTextStream in(&file);
+    QString s = in.readAll();
+    this->setStyleSheet(s);
 }
 
 qjdHelp::~qjdHelp()
